@@ -383,6 +383,7 @@
                     }
 
                     $('#product_code').html(data.product.product_code);
+                    $('#product_quantity_type').html(data.product.product_quantity_type);
                     $('#category').html(data.product.category_info.category_name);
 
                     // pricing

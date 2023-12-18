@@ -61,6 +61,10 @@
                                 </div>
                             </div>
 
+                            <div class="attr-detail attr-size mb-30">
+                                <strong class="mr-10">Quantity Type: </strong>
+                                <span class="fs-5" id="product_quantity_type"></span>
+                            </div>
 
                             <div class="attr-detail attr-size mb-30" id="product_color_area">
                                 <strong class="mr-10" style="width:50px;">Color : </strong>
@@ -94,6 +98,7 @@
                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                 </div>
                                 <div class="product-extra-link2">
+                                    <input type="hidden" id="product_id">
                                     <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
                                 </div>
                             </div>
