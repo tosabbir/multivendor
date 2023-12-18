@@ -1,4 +1,4 @@
-@extends('admin.admin_master')
+a@extends('admin.admin_master')
 @section('content')
     <div class="page-content">
 
@@ -159,7 +159,7 @@
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Discount Price</label>
                                         <input type="number" class="form-control" id="product_discount_price"
-                                            placeholder="10%" name="product_discount_price" value="{{old('product_discount_price')}}">
+                                            placeholder="50" name="product_discount_price" value="{{old('product_discount_price')}}">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="inputPrice" class="form-label">Event Price</label>

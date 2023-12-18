@@ -34,6 +34,15 @@ class SubcategoryTableSeeder extends Seeder
                 'sub_category_creator' => 2,
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
             ],
+            [
+                'sub_category_name' => 'T-Shirt',
+                'sub_category_slug' => 't-shirt',
+                'sub_category_status' => 1,
+                'category_id' => 3,
+                'category_slug' => 'fashion',
+                'sub_category_creator' => 2,
+                'created_at' => Carbon::now()->toDateTimeLocalString(),
+            ],
 
         ]);
     }

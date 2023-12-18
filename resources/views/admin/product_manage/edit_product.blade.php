@@ -210,13 +210,14 @@
                                         @enderror
                                     </div>
 
+                                    @php
+                                        $brand = App\Models\Brand::where('brand_status', 1)->where('brand_id', $data->brand_id)->first();
+
+                                    @endphp
+                                    @if ($brand)
                                     <div class="col-12">
                                         <label for="brand_id" class="form-label">Brand</label>
 
-                                        @php
-                                            $brand = App\Models\Brand::where('brand_status', 1)->where('brand_id', $data->brand_id)->first();
-
-                                        @endphp
 
                                         <select class="form-select @error('brand_id')
                                             is-invalid
@@ -230,7 +231,7 @@
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror
                                     </div>
-
+                                    @endif
 
                                     @php
                                         $vendor = App\Models\User::where('status_id', 1)->where('user_id', $data->vendor_id)->first();

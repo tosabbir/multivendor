@@ -357,9 +357,32 @@
                 success: function (data) {
                     // basic data
                     $('#product_name').html(data.product.product_name);
-                    $('#vendor_shop_name').html(data.product.vendor_info.vendor_shop_name);
+
+                    if(data.product.vendor_info == null){
+
+                        $('#vendor_shop_name').html(" ");
+                    }else{
+                        $('#vendor_shop_name').html(data.product.vendor_info.vendor_shop_name);
+
+                    }
+                    if(data.product.vendor_info == null){
+
+                        $('#vendor_shop_name').html(" ");
+                    }else{
+                        $('#vendor_shop_name').html(data.product.vendor_info.vendor_shop_name);
+
+                    }
+
+
+                    if(data.product.brand_info == null){
+
+                        $('#brand').html(" ");
+                    }else{
+                        $('#brand').html(data.product.brand_info.brand_name);
+
+                    }
+
                     $('#product_code').html(data.product.product_code);
-                    $('#brand').html(data.product.brand_info.brand_name);
                     $('#category').html(data.product.category_info.category_name);
 
                     // pricing

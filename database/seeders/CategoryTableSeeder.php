@@ -30,6 +30,13 @@ class CategoryTableSeeder extends Seeder
                 'category_creator' => 2,
                 'created_at' => Carbon::now()->toDateTimeLocalString(),
             ],
+            [
+                'category_name' => 'Fashion',
+                'category_slug' => 'fashion',
+                'category_status' => 1,
+                'category_creator' => 2,
+                'created_at' => Carbon::now()->toDateTimeLocalString(),
+            ],
 
         ]);
     }
