@@ -285,6 +285,7 @@
     <script src="{{ asset('frontend') }}/assets/js/shop.js?v=5.3"></script>
 
     <script>
+          import Swal from 'sweetalert2';
         $(function() {
             $(".knob").knob();
         });
