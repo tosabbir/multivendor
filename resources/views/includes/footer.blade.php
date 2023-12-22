@@ -473,12 +473,53 @@
                     showConfirmButton: false,
                     timer: 1500
                     });
+
+                    window.location.reload();
                 }
             });
         }
 
-            // product add to cart end
+        // product add to cart end
 
+
+        // add to minicart start
+
+        // function addToMiniCart(){
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "/add/to/mini/cart",
+        //         dataType: "json",
+        //         success: function (response) {
+        //             console.log(response);
+        //         }
+        //     });
+        // }
+
+        // add to minicart end
+
+
+        // remove cart form mini cart
+        function removeCartFromMiniCart(){
+            var cart_id = document.getElementById('miniCartItemId').value;
+
+            $.ajax({
+                type: "get",
+                url: "{{url('/remove/mini/cart/item')}}/"+cart_id,
+                dataType: "json",
+                success: function (response) {
+
+                    Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully Remove From your cart",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+
+                    window.location.reload();
+                }
+            });
+        }
     </script>
 </body>
 

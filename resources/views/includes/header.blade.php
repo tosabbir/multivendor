@@ -1,3 +1,17 @@
+@php
+
+    use Gloudemans\Shoppingcart\Facades\Cart;
+
+
+    $carts = Cart::content();
+
+    // dd($carts);
+
+@endphp
+
+
+
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -140,41 +154,34 @@
                                     <a class="mini-cart-icon" href="shop-cart.html">
                                         <img alt="Nest"
                                             src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-cart.svg" />
-                                        <span class="pro-count blue">2</span>
+                                        <span class="pro-count blue">{{ Cart::count() }}</span>
                                     </a>
                                     <a href="shop-cart.html"><span class="lable">Cart</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul>
+
+                                            @foreach ($carts as $cart)
+
                                             <li>
                                                 <div class="shopping-cart-img">
                                                     <a href="shop-product-right.html"><img alt="Nest"
-                                                            src="{{ asset('frontend') }}/assets/imgs/shop/thumbnail-3.jpg" /></a>
+                                                            src="{{ asset('uploads/product/'.$cart->options['image']) }}" /></a>
                                                 </div>
                                                 <div class="shopping-cart-title">
-                                                    <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
-                                                    <h4><span>1 × </span>$800.00</h4>
+                                                    <h4><a href="shop-product-right.html">{{$cart->name}}</a></h4>
+                                                    <h4><span>{{$cart->qty}} × </span>{{$cart->price}}</h4>
                                                 </div>
                                                 <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                    <input type="hidden" id="miniCartItemId" value="{{$cart->rowId}}">
+                                                    <a type="button" onclick="removeCartFromMiniCart()"><i class="fi-rs-cross-small"></i></a>
                                                 </div>
                                             </li>
-                                            <li>
-                                                <div class="shopping-cart-img">
-                                                    <a href="shop-product-right.html"><img alt="Nest"
-                                                            src="{{ asset('frontend') }}/assets/imgs/shop/thumbnail-2.jpg" /></a>
-                                                </div>
-                                                <div class="shopping-cart-title">
-                                                    <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
-                                                    <h4><span>1 × </span>$3200.00</h4>
-                                                </div>
-                                                <div class="shopping-cart-delete">
-                                                    <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                                </div>
-                                            </li>
+                                            @endforeach
+
                                         </ul>
                                         <div class="shopping-cart-footer">
                                             <div class="shopping-cart-total">
-                                                <h4>Total <span>$4000.00</span></h4>
+                                                <h4>Total <span>${{ Cart::subTotal() }}</span></h4>
                                             </div>
                                             <div class="shopping-cart-button">
                                                 <a href="shop-cart.html" class="outline">View cart</a>

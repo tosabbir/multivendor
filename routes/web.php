@@ -218,6 +218,8 @@ Route::controller(FrontendController::class)->group(function(){
 // all Cart route here
 Route::controller(CartController::class)->group(function(){
     Route::post('/product/add/to/cart/{product_id}', 'productAddToCart');
+    // Route::get('/add/to/mini/cart', 'productAddToMiniCart');
+    Route::get('/remove/mini/cart/item/{id}', 'removeMiniCartItem');
 
 });
 
