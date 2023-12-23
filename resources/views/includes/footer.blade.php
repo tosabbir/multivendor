@@ -462,6 +462,9 @@
                     product_name:product_name, product_color:product_color, product_size:product_size, product_quantity:product_quantity, product_descount_price:product_descount_price
                 },
                 dataType: "json",
+
+                // for preloader data featching before
+                // beforeSend:
                 success: function (data) {
                     $('#close_modal').click();
                     $('#quantity').val(1);
@@ -478,7 +481,8 @@
                     });
 
 
-                }
+                },
+                // completed:
             });
         }
 
@@ -575,12 +579,13 @@
                 },
                 dataType: "json",
                 success: function (data) {
-
+                    addToMiniCart()
                     // window.location.reload();
 
                     Swal.fire({
                     position: "top-end",
                     icon: "success",
+                    toast: true,
                     title: "Successfully added on your cart",
                     showConfirmButton: false,
                     timer: 1500
