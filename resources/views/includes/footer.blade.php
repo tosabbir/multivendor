@@ -390,7 +390,6 @@
                     $('#quantity').val();
                     // pricing
                     if (data.product.product_discount_price == null) {
-                        $('#product_descount_price').text('');
                         $('#discount').text('');
                         $('#product_descount_price').text(data.product.product_sel_price);
                     } else {
@@ -466,6 +465,8 @@
                 success: function (data) {
                     $('#close_modal').click();
 
+                    window.location.reload();
+
                     Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -474,7 +475,7 @@
                     timer: 1500
                     });
 
-                    window.location.reload();
+
                 }
             });
         }
@@ -508,6 +509,8 @@
                 dataType: "json",
                 success: function (response) {
 
+                    window.location.reload();
+
                     Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -516,10 +519,51 @@
                     timer: 1500
                     });
 
-                    window.location.reload();
+
                 }
             });
         }
+
+        // add to mini cart from product details
+
+        function addToCartFromDetailsPage() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var product_name = $('#dproduct_name').text();
+            var product_id = $('#dproduct_id').val();
+            var product_color = $('#dproduct_color option:selected').text();
+            var product_size = $('#dproduct_size option:selected').text();
+            var product_quantity = $('#dquantity').val();
+            var product_descount_price = $('#dproduct_descount_price').text();
+
+            $.ajax({
+                type: "POST",
+                url: "{{url('/product/add/to/cart/from/details/page')}}/"+product_id,
+                data: {
+                    product_name:product_name, product_color:product_color, product_size:product_size, product_quantity:product_quantity, product_descount_price:product_descount_price
+                },
+                dataType: "json",
+                success: function (data) {
+
+                    window.location.reload();
+
+                    Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully added on your cart",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+
+
+                }
+            });
+        }
+
     </script>
 </body>
 

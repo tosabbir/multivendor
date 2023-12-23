@@ -50,6 +50,48 @@ class CartController extends Controller
 
     }
 
+     //add to cart from product details page
+     public function productAddToCartFromDetailsPage(Request $request, $id){
+
+        $product = Product::findOrFail($id);
+
+        if($product->product_discount_price == null){
+
+            Cart::add([
+                'id' => $id,
+                'name' => $request->product_name,
+                'qty' => $request->product_quantity,
+                'price' => $product->product_sel_price,
+                'options' => [
+                    'image' => $product->product_thumbnail,
+                    'color' => $request->product_color,
+                    'size' => $request->product_size,
+                ],
+            ]);
+
+            return response()->json([
+                'success' => 'Successfully added on your cart',
+            ]);
+        }else{
+            Cart::add([
+                'id' => $id,
+                'name' => $request->product_name,
+                'qty' => $request->product_quantity,
+                'price' => $request->product_descount_price,
+                'options' => [
+                    'image' => $product->product_thumbnail,
+                    'color' => $request->product_color,
+                    'size' => $request->product_size,
+                ],
+            ]);
+
+            return response()->json([
+                'success' => 'Successfully added on your cart',
+            ]);
+        }
+
+    }
+
     // get in mini cart
     // public function productAddToMiniCart(){
     //     $carts = Cart::content();
