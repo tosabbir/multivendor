@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -18,9 +18,9 @@ class CartController extends Controller
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
-                'qty' => $request->product_quantity,
+                'quantity' => $request->product_quantity,
                 'price' => $product->product_sel_price,
-                'options' => [
+                'attributes' => [
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
@@ -34,9 +34,9 @@ class CartController extends Controller
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
-                'qty' => $request->product_quantity,
+                'quantity' => $request->product_quantity,
                 'price' => $request->product_descount_price,
-                'options' => [
+                'attributes' => [
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
@@ -60,9 +60,9 @@ class CartController extends Controller
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
-                'qty' => $request->product_quantity,
+                'quantity' => $request->product_quantity,
                 'price' => $product->product_sel_price,
-                'options' => [
+                'attributes' => [
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
@@ -76,9 +76,9 @@ class CartController extends Controller
             Cart::add([
                 'id' => $id,
                 'name' => $request->product_name,
-                'qty' => $request->product_quantity,
+                'quantity' => $request->product_quantity,
                 'price' => $request->product_descount_price,
-                'options' => [
+                'attributes' => [
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
@@ -93,15 +93,19 @@ class CartController extends Controller
     }
 
     // get in mini cart
-    // public function productAddToMiniCart(){
-    //     $carts = Cart::content();
-    //     $cartQuantity = Cart::count();
+    public function productAddToMiniCart(){
+        $carts = Cart::getContent();
+        $cartQuantity = $carts->count();;
+        $cartSubTotal = Cart::getSubTotal();
 
-    //     return response()->json(array(
-    //         'carts' => $carts
-    //     ));
+        return response()->json(array(
+            'carts' => $carts,
+            'cartQuantity' => $cartQuantity,
+            'cartSubTotal' => $cartSubTotal,
 
-    // }
+        ));
+
+    }
 
     // remove mini cart item
     public function removeMiniCartItem($cart_id){
@@ -109,7 +113,7 @@ class CartController extends Controller
         Cart::remove($cart_id);
 
         return response()->json([
-            'success' => 'Successfully added on your cart',
+            'success' => 'Successfully remove from your cart',
         ]);
     }
 }

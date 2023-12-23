@@ -464,12 +464,14 @@
                 dataType: "json",
                 success: function (data) {
                     $('#close_modal').click();
-
-                    window.location.reload();
+                    $('#quantity').val(1);
+                    addToMiniCart()
+                    // window.location.reload();
 
                     Swal.fire({
                     position: "top-end",
                     icon: "success",
+                    toast: true,
                     title: "Successfully added on your cart",
                     showConfirmButton: false,
                     timer: 1500
@@ -485,23 +487,48 @@
 
         // add to minicart start
 
-        // function addToMiniCart(){
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "/add/to/mini/cart",
-        //         dataType: "json",
-        //         success: function (response) {
-        //             console.log(response);
-        //         }
-        //     });
-        // }
+        function addToMiniCart(){
+            $.ajax({
+                type: "GET",
+                url: "/add/to/mini/cart",
+                dataType: "json",
+                success: function (response) {
 
+                    var miniCart = " ";
+                    $.each(response.carts, function (key, value) {
+
+                        miniCart += `<li>
+                                    <div class="shopping-cart-img">
+                                        <a href="shop-product-right.html"><img alt="Nest"
+                                                src="uploads/product/${value.attributes.image}"></a>
+                                    </div>
+                                    <div class="shopping-cart-title">
+                                        <h4><a href="shop-product-right.html">name</a></h4>
+                                        <h4><span>${value.quantity} × </span>${value.price}</h4>
+                                    </div>
+                                    <div class="shopping-cart-delete">
+
+                                        <a type="button" onclick="removeCartFromMiniCart(${value.id})"><i class="fi-rs-cross-small"></i></a>
+                                    </div>
+                                </li>
+                        `
+                    });
+                    $("#miniCart").html(miniCart);
+                    $("#miniSubtotal").text(response.cartSubTotal);
+                    $("#miniCount").text(response.cartQuantity)
+
+
+                }
+            });
+        }
+
+        addToMiniCart()
         // add to minicart end
 
 
         // remove cart form mini cart
-        function removeCartFromMiniCart(){
-            var cart_id = document.getElementById('miniCartItemId').value;
+        function removeCartFromMiniCart(cart_id){
+
 
             $.ajax({
                 type: "get",
@@ -509,10 +536,10 @@
                 dataType: "json",
                 success: function (response) {
 
-                    window.location.reload();
-
+                    addToMiniCart();
                     Swal.fire({
                     position: "top-end",
+                    toast: true,
                     icon: "success",
                     title: "Successfully Remove From your cart",
                     showConfirmButton: false,
@@ -549,7 +576,7 @@
                 dataType: "json",
                 success: function (data) {
 
-                    window.location.reload();
+                    // window.location.reload();
 
                     Swal.fire({
                     position: "top-end",
