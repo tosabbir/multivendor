@@ -13,6 +13,7 @@ use App\Http\Controllers\Superadmin\SuperadminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorProductController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -209,22 +210,30 @@ Route::controller(FrontendController::class)->group(function(){
     Route::get('/categorywise/product/{slug}', 'categorywiseProduct')->name('categorywise.product');
     Route::get('/sub/categorywise/product/{slug}', 'subCategorywiseProduct')->name('sub.categorywise.product');
 
-
     // product quick view
     Route::get('/product/quick/view/{id}', 'productQuickView');
 
+    // all Cart route here
+    Route::controller(CartController::class)->group(function(){
+        Route::post('/product/add/to/cart/{product_id}', 'productAddToCart');
+        Route::get('/add/to/mini/cart', 'productAddToMiniCart');
+
+        Route::post('/product/add/to/cart/from/details/page/{product_id}', 'productAddToCartFromDetailsPage');
+
+        Route::get('/remove/mini/cart/item/{id}', 'removeMiniCartItem');
+
+    });
+
 });
 
-// all Cart route here
-Route::controller(CartController::class)->group(function(){
-    Route::post('/product/add/to/cart/{product_id}', 'productAddToCart');
-    Route::get('/add/to/mini/cart', 'productAddToMiniCart');
+// all wishlist related route here
+Route::middleware(['auth','role:4','verified'])->group(function(){
 
-    Route::post('/product/add/to/cart/from/details/page/{product_id}', 'productAddToCartFromDetailsPage');
-
-    Route::get('/remove/mini/cart/item/{id}', 'removeMiniCartItem');
-
+    Route::controller(WishlistController::class)->group(function(){
+        Route::get('/all/wishlist', 'allWishlist')->name('all.wishlist');
+    });
 });
+
 
 
 // Route::get('/dashboard', function () {
