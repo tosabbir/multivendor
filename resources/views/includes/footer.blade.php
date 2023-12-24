@@ -595,6 +595,51 @@
                 }
             });
         }
+        // end function
+
+
+        // add to wishlist start
+
+        function addToWishlist(product_id){
+
+            $.ajax({
+                type: "get",
+                url: "{{url('/product/add/to/wishlist')}}/"+product_id,
+                dataType: "json",
+
+                success: function (response) {
+                    console.log(response.error);
+
+                    if($.isEmptyObject(response.error)){
+
+                        Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        type: 'success',
+                        toast: true,
+                        title: response.success,
+                        showConfirmButton: false,
+                        timer: 1500
+                        });
+                    }else{
+
+                        Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        type: 'error',
+                        toast: true,
+                        title: response.error,
+                        showConfirmButton: false,
+                        timer: 2500
+                        });
+                    }
+
+                }
+            });
+
+        }
+
+        // add to wishlist end
 
     </script>
 </body>

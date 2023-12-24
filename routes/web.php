@@ -226,7 +226,14 @@ Route::controller(FrontendController::class)->group(function(){
 
 });
 
-// all wishlist related route here
+// all wishlist related route here before login
+
+Route::controller(WishlistController::class)->group(function(){
+    Route::get('/product/add/to/wishlist/{id}', 'addToWishlist');
+});
+
+
+// all wishlist related route here after login
 Route::middleware(['auth','role:4','verified'])->group(function(){
 
     Route::controller(WishlistController::class)->group(function(){
