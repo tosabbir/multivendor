@@ -135,7 +135,15 @@
                                             src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-heart.svg" />
                                         <span class="pro-count blue" id="wishlistCount"></span>
                                     </a>
-                                    <a href="{{route('all.wishlist')}}"><span class="lable">Wishlist</span></a>
+                                    {{-- <a href="{{route('all.wishlist')}}"><span class="lable">Wishlist</span></a> --}}
+                                </div>
+                                <div class="header-action-icon-2">
+                                    <a href="{{ route('all.compare') }}">
+                                        <img class="svgInject" alt="Nest"
+                                            src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-compare.svg" />
+                                        <span class="pro-count blue" id="compareCount"></span>
+                                    </a>
+                                    {{-- <a href="{{route('all.wishlist')}}"><span class="lable">Wishlist</span></a> --}}
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="shop-cart.html">

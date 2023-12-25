@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CompareController extends Controller
 {
+        //all item
+        public function allCompare(){
+            $all = Compare::where('user_id', Auth::user()->user_id)->latest()->get();
+            return view('compare', compact('all'));
+        }
 
      //add item
      public function addToCompare($id){

@@ -15,6 +15,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\WishlistController;
+use App\Models\Compare;
 use Illuminate\Support\Facades\Route;
 
 
@@ -250,6 +251,13 @@ Route::controller(CompareController::class)->group(function(){
     Route::get('/product/add/to/compare/{id}', 'addToCompare');
 });
 
+// all compare related route here after login
+Route::middleware(['auth','role:4','verified'])->group(function(){
+
+    Route::controller(CompareController::class)->group(function(){
+        Route::get('/all/compare', 'allCompare')->name('all.compare');
+    });
+});
 
 
 // Route::get('/dashboard', function () {
