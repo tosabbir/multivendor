@@ -256,6 +256,7 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
 
     Route::controller(CompareController::class)->group(function(){
         Route::get('/all/compare', 'allCompare')->name('all.compare');
+        Route::get('/remove/compare/{id}', 'removeCompare')->name('remove.compare');
     });
 });
 

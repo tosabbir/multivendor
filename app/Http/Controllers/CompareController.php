@@ -16,7 +16,7 @@ class CompareController extends Controller
         }
 
      //add item
-     public function addToCompare($id){
+    public function addToCompare($id){
 
         if( Auth::check() ){
             $exists = Compare::where('product_id', $id)->where('user_id' , Auth::user()->user_id)->first();
@@ -47,5 +47,18 @@ class CompareController extends Controller
             ]);
         }
 
+    }
+
+    // remove compare
+    public function removeCompare($id){
+
+        $item = Compare::find($id)->delete();
+
+        $notification = array(
+            'message' => "Successfully Remove From Your Compare",
+            'alert-type' => "success",
+        );
+
+        return back()->with($notification);
     }
 }

@@ -31,7 +31,7 @@ class WishlistController extends Controller
 
                 return response()->json([
                     'success' => 'Successfully Added In Your Wishlist',
-                
+
                 ]);
 
             }else{
@@ -59,6 +59,7 @@ class WishlistController extends Controller
         ]);
     }
 
+    // remove wishlist
     public function removeWishlist($id){
 
         $item = Wishlist::find($id)->delete();
