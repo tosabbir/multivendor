@@ -31,12 +31,14 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($all as $item)
+
                         <tr class="pt-30">
                             <td class="custome-checkbox pl-30">
                             </td>
-                            <td class="image product-thumbnail pt-40"><img src="assets/imgs/shop/product-1-1.jpg" alt="#" /></td>
+                            <td class="image product-thumbnail pt-40"><img src="{{asset('uploads/product/'.$item->productInfo->product_thumbnail)}}" alt="#" /></td>
                             <td class="product-des product-name">
-                                <h6><a class="product-name mb-10" href="shop-product-right.html">Field Roast Chao Cheese Creamy Original</a></h6>
+                                <h6><a class="product-name mb-10" href="shop-product-right.html">{{$item->productInfo->product_name}}</a></h6>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width: 90%"></div>
@@ -45,8 +47,10 @@
                                 </div>
                             </td>
                             <td class="price" data-title="Price">
-                                <h3 class="text-brand">$2.51</h3>
+                                <h3 class="text-brand">{{ ($item->prodcutInfo?->product_discount_price == null)? ($item->productInfo->product_sel_price - $item->productInfo->product_discount_price) : $item->productInfo->product_discount_price }}</h3>
+
                             </td>
+
                             <td class="text-center detail-info" data-title="Stock">
                                 <span class="stock-status in-stock mb-0"> In Stock </span>
                             </td>
@@ -54,9 +58,10 @@
                                 <button class="btn btn-sm">Add to cart</button>
                             </td>
                             <td class="action text-center" data-title="Remove">
-                                <a href="#" class="text-body"><i class="fi-rs-trash"></i></a>
+                                <a href="{{ route('remove.wishlist',$item->productInfo->product_id) }}" class="text-body"><i class="fi-rs-trash"></i></a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

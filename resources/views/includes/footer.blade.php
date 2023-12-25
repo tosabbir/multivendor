@@ -608,7 +608,6 @@
                 dataType: "json",
 
                 success: function (response) {
-                    console.log(response.error);
 
                     if($.isEmptyObject(response.error)){
 
@@ -640,6 +639,23 @@
         }
 
         // add to wishlist end
+
+
+        // count wishlist start
+
+        function countWishlist(){
+
+            $.ajax({
+                type: "get",
+                url: "/count/wishlist",
+                dataType: "json",
+                success: function (response) {
+                    $('#wishlistCount').text(response.wishlistCount);
+                }
+            });
+        }
+        countWishlist();
+        // count wishlist end
 
     </script>
 </body>

@@ -238,6 +238,8 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
 
     Route::controller(WishlistController::class)->group(function(){
         Route::get('/all/wishlist', 'allWishlist')->name('all.wishlist');
+        Route::get('/count/wishlist', 'countWishlist')->name('count.wishlist');
+        Route::get('/remove/wishlist/{id}', 'removeWishlist')->name('remove.wishlist');
     });
 });
 
