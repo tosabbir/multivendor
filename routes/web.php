@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CompareController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -241,6 +242,12 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
         Route::get('/count/wishlist', 'countWishlist')->name('count.wishlist');
         Route::get('/remove/wishlist/{id}', 'removeWishlist')->name('remove.wishlist');
     });
+});
+
+// all compare related route here before login
+
+Route::controller(CompareController::class)->group(function(){
+    Route::get('/product/add/to/compare/{id}', 'addToCompare');
 });
 
 

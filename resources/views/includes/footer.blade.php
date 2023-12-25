@@ -614,7 +614,7 @@
                         Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        type: 'success',
+                     
                         toast: true,
                         title: response.success,
                         showConfirmButton: false,
@@ -625,7 +625,7 @@
                         Swal.fire({
                         position: "top-end",
                         icon: "error",
-                        type: 'error',
+
                         toast: true,
                         title: response.error,
                         showConfirmButton: false,
@@ -656,6 +656,50 @@
         }
         countWishlist();
         // count wishlist end
+
+
+
+         // add to compare start
+
+         function addToCompare(product_id){
+
+            $.ajax({
+                type: "get",
+                url: "{{url('/product/add/to/compare')}}/"+product_id,
+                dataType: "json",
+
+                success: function (response) {
+
+                    if($.isEmptyObject(response.error)){
+
+                        Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        type: 'success',
+                        toast: true,
+                        title: response.success,
+                        showConfirmButton: false,
+                        timer: 1500
+                        });
+                    }else{
+
+                        Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        type: 'error',
+                        toast: true,
+                        title: response.error,
+                        showConfirmButton: false,
+                        timer: 2500
+                        });
+                    }
+
+                }
+            });
+
+            }
+
+        // add to compare end
 
     </script>
 </body>

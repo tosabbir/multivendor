@@ -58,7 +58,7 @@
                                 <button class="btn btn-sm">Add to cart</button>
                             </td>
                             <td class="action text-center" data-title="Remove">
-                                <a href="{{ route('remove.wishlist',$item->productInfo->product_id) }}" class="text-body"><i class="fi-rs-trash"></i></a>
+                                <a href="{{ route('remove.wishlist',$item->id) }}" class="text-body"><i class="fi-rs-trash"></i></a>
                             </td>
                         </tr>
                         @endforeach
