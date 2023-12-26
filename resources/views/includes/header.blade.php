@@ -24,7 +24,7 @@
                             <ul>
 
                                 <li><a href="page-account.html">My Cart</a></li>
-                                <li><a href="shop-wishlist.html">Checkout</a></li>
+                                <li><a href="{{route('all.wishlist')}}">Checkout</a></li>
                                 <li><a href="shop-order.html">Order Tracking</a></li>
                             </ul>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="header-info header-info-right">
                             <ul>
 
-                                <li>
+                                {{-- <li>
                                     <a class="language-dropdown-active" href="#">English <i
                                             class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
@@ -64,7 +64,7 @@
                                                     alt="" />Pусский</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> --}}
 
                                 <li>Need help? Call Us: <strong class="text-brand"> + 1800 900</strong></li>
 
@@ -108,7 +108,7 @@
                         </div>
                         <div class="header-action-right">
                             <div class="header-action-2">
-                                <div class="search-location">
+                                {{-- <div class="search-location">
                                     <form action="#">
                                         <select class="select-active">
                                             <option>Your Location</option>
@@ -127,7 +127,7 @@
                                             <option>New York</option>
                                         </select>
                                     </form>
-                                </div>
+                                </div> --}}
 
                                 <div class="header-action-icon-2">
                                     <a href="{{route('all.wishlist')}}">
@@ -192,7 +192,7 @@
                                                     Voucher</a>
                                             </li>
                                             <li>
-                                                <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My
+                                                <a href="{{ route('all.wishlist') }}"><i class="fi fi-rs-heart mr-10"></i>My
                                                     Wishlist</a>
                                             </li>
                                             <li>
