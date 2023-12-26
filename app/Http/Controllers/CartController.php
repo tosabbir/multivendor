@@ -121,4 +121,18 @@ class CartController extends Controller
     public function allCart(){
         return view('cart');
     }
+
+     // get in cart page
+     public function myCart(){
+        $carts = Cart::getContent();
+        $cartQuantity = $carts->count();;
+        $cartSubTotal = Cart::getSubTotal();
+
+        return response()->json(array(
+            'myCarts' => $carts,
+            // 'cartQuantity' => $cartQuantity,
+            // 'cartSubTotal' => $cartSubTotal,
+        ));
+
+    }
 }

@@ -269,6 +269,7 @@
     <script src="{{ asset('frontend') }}/assets/js/plugins/jquery.syotimer.min.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/plugins/waypoints.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/plugins/wow.js"></script>
+    <script src="{{ asset('frontend') }}assets/js/plugins/jquery-ui.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/plugins/perfect-scrollbar.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/plugins/magnific-popup.js"></script>
     <script src="{{ asset('frontend') }}/assets/js/plugins/select2.min.js"></script>
@@ -504,10 +505,10 @@
                         miniCart += `<li>
                                     <div class="shopping-cart-img">
                                         <a href="shop-product-right.html"><img alt="Nest"
-                                                src="uploads/product/${value.attributes.image}"></a>
+                                                src="/uploads/product/${value.attributes.image}"></a>
                                     </div>
                                     <div class="shopping-cart-title">
-                                        <h4><a href="shop-product-right.html">name</a></h4>
+                                        <h4><a href="shop-product-right.html">${value.name}</a></h4>
                                         <h4><span>${value.quantity} × </span>${value.price}</h4>
                                     </div>
                                     <div class="shopping-cart-delete">
@@ -713,9 +714,76 @@
                     $('#compareCount').text(response.compareCount);
                 }
             });
-            }
+        }
             countCompare();
             // count compare end
+
+        // load to cart page start
+
+        function myCarts(){
+            $.ajax({
+                type: "GET",
+                url: "/my/carts",
+                dataType: "json",
+                success: function (response) {
+
+                    var myCarts = " ";
+                    $.each(response.myCarts, function (key, value) {
+
+                        myCarts += `
+                        <tr class="pt-30">
+                                <td class="custome-checkbox pl-30">
+                                    {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
+                                    <label class="form-check-label" for="exampleCheckbox1"></label> --}}
+                                </td>
+                                <td class="image product-thumbnail pt-40"><img src="/uploads/product/${value.attributes.image}" alt="#"></td>
+                                <td class="product-des product-name">
+                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">${value.name}</a></h6>
+                                    <div class="product-rate-cover">
+                                        <div class="product-rate d-inline-block">
+                                            <div class="product-rating" style="width:90%">
+                                            </div>
+                                        </div>
+                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    </div>
+                                </td>
+                                <td class="price" data-title="Price">
+                                    <h4 class="text-body">$${value.price} </h4>
+                                </td>
+                                <td class="price" data-title="Price">
+                                    ${value.attributes.size == null ? `<h5 class="text-body"> N/A </h5>` :
+                                    `<h5 class="text-body">${value.attributes.size}</h5>`}
+                                </td>
+                                <td class="price" data-title="Price">
+
+                                    ${value.attributes.color == null ? `<h5 class="text-body"> N/A </h5>` :
+                                    `<h5 class="text-body">${value.attributes.color}</h5>`}
+                                </td>
+                                <td class="text-center detail-info" data-title="Stock">
+                                    <div class="detail-extralink mr-15">
+                                        <div class="detail-qty border radius">
+                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                            <input type="text" name="quantity" class="qty-val" value="${value.quantity}" min="1">
+                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price" data-title="Price">
+                                    <h4 class="text-brand">$${(value.quantity * value.price)} </h4>
+                                </td>
+                                <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                            </tr>
+                        `
+                    });
+
+                    $("#myCarts").html(myCarts);
+                }
+            });
+        }
+
+        myCarts();
+        // load to cart page end
+
 
 
     </script>

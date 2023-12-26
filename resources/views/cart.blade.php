@@ -17,7 +17,7 @@
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
-                    <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear Cart</a></h6>
+                 
                 </div>
             </div>
         </div>
@@ -40,47 +40,9 @@
                                 <th scope="col" class="end">Remove</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="myCarts">
 
-                            <tr class="pt-30">
-                                <td class="custome-checkbox pl-30">
-                                    {{-- <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="">
-                                    <label class="form-check-label" for="exampleCheckbox1"></label> --}}
-                                </td>
-                                <td class="image product-thumbnail pt-40"><img src="assets/imgs/shop/product-1-1.jpg" alt="#"></td>
-                                <td class="product-des product-name">
-                                    <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">Field Roast Chao Cheese Creamy Original</a></h6>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width:90%">
-                                            </div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                </td>
-                                <td class="price" data-title="Price">
-                                    <h4 class="text-body">$2.51 </h4>
-                                </td>
-                                <td class="price" data-title="Price">
-                                    <h5 class="text-body">Red</h5>
-                                </td>
-                                <td class="price" data-title="Price">
-                                    <h5 class="text-body">XL </h5>
-                                </td>
-                                <td class="text-center detail-info" data-title="Stock">
-                                    <div class="detail-extralink mr-15">
-                                        <div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <input type="text" name="quantity" class="qty-val" value="1" min="1">
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="price" data-title="Price">
-                                    <h4 class="text-brand">$2.51 </h4>
-                                </td>
-                                <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
-                            </tr>
+                            {{-- load cart item form ajax  --}}
 
                         </tbody>
                     </table>
