@@ -16,7 +16,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $all = Coupon::withTrashed()->latest()->get();
+        $all = Coupon::whereNull('deleted_at')->latest()->get();
         return view('admin.coupon.all_coupon', compact('all'));
     }
 
@@ -122,92 +122,80 @@ class CouponController extends Controller
     /**
      * Soft Delete the specified resource from storage.
      */
-    // public function softDelete(string $slug)
-    // {
+    public function softDelete(string $slug)
+    {
 
 
-    //     $update = Subcategory::where('sub_category_slug', $slug)->update([
-    //         'deleted_at' => Carbon::now(),
-    //         'updated_at' => Carbon::now(),
-    //         'sub_category_editor' => Auth::user()->id,
-    //     ]);
+        $softDelete = Coupon::where('coupon_code', $slug)->delete();
 
-    //     if($update){
-    //         $notification = array(
-    //             'message' => "Sub Category Move To Trash Successfully",
-    //             'alert-type' => "success",
-    //         );
+        if($softDelete){
+            $notification = array(
+                'message' => "Coupons Move To Trash Successfully",
+                'alert-type' => "success",
+            );
 
-    //     }else{
-    //         $notification = array(
-    //             'message' => "Opps, Something is Wrong",
-    //             'alert-type' => "error",
-    //         );
-    //     }
-    //     return redirect()->route('admin.all.sub.category')->with($notification);
-    // }
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.coupon')->with($notification);
+    }
 
 
     /**
      * Show All Delete or Recycle Item.
      */
-    // public function recycle()
-    // {
-    //     $all = SubCategory::whereNotNull('deleted_at')->latest()->get();
-    //     return view('admin.subCategory.all_recycle_sub_category', compact('all'));
-    // }
+    public function recycle()
+    {
+        $all = Coupon::onlyTrashed()->latest()->get();
+        return view('admin.coupon.all_recycle_coupon', compact('all'));
+    }
 
     /**
      * Restore Delete or Recycle Item.
      */
-    // public function restore($slug)
-    // {
-    //     $update = Subcategory::where('sub_category_slug', $slug)->update([
-    //         'deleted_at' => null,
-    //         'updated_at' => Carbon::now(),
-    //         'sub_category_editor' => Auth::user()->id,
-    //     ]);
+    public function restore($slug)
+    {
+        $update = Coupon::where('coupon_code', $slug)->restore();
 
-    //     if($update){
-    //         $notification = array(
-    //             'message' => "Sub Category Restore Successfully",
-    //             'alert-type' => "success",
-    //         );
+        if($update){
+            $notification = array(
+                'message' => "Coupon Restore Successfully",
+                'alert-type' => "success",
+            );
 
-    //     }else{
-    //         $notification = array(
-    //             'message' => "Opps, Something is Wrong",
-    //             'alert-type' => "error",
-    //         );
-    //     }
-    //     return back()->with($notification);
-    // }
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return back()->with($notification);
+    }
 
     /**
      * Permanently Delete Item.
      */
-    // public function permanentlyDelete($slug)
-    // {
+    public function permanentlyDelete($slug)
+    {
 
-    //     $image = Subcategory::where('sub_category_slug', $slug)->value('sub_category_image');
-    //     if(File::exists(public_path('uploads/subCategory/'.$image))){
-    //         File::delete(public_path('uploads/subCategory/'.$image));
-    //     }
 
-    //     $delete = Subcategory::where('sub_category_slug', $slug)->delete();
+        $delete = Coupon::where('coupon_code', $slug)->forceDelete();
 
-    //     if($delete){
-    //         $notification = array(
-    //             'message' => "Sub Category Permanently Deleted Successfully",
-    //             'alert-type' => "success",
-    //         );
+        if($delete){
+            $notification = array(
+                'message' => "Coupon Permanently Deleted Successfully",
+                'alert-type' => "success",
+            );
 
-    //     }else{
-    //         $notification = array(
-    //             'message' => "Opps, Something is Wrong",
-    //             'alert-type' => "error",
-    //         );
-    //     }
-    //     return redirect()->route('admin.all.sub.category')->with($notification);
-    // }
+        }else{
+            $notification = array(
+                'message' => "Opps, Something is Wrong",
+                'alert-type' => "error",
+            );
+        }
+        return redirect()->route('admin.all.coupon')->with($notification);
+    }
 }
