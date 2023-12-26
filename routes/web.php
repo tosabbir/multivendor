@@ -241,6 +241,9 @@ Route::controller(FrontendController::class)->group(function(){
         // decrement cart quantity
         Route::get('/dec/cart/qty/{id}', 'decCartQty');
 
+        // increment cart quantity
+        Route::get('/inc/cart/qty/{id}', 'incCartQty');
+
 
 
     });

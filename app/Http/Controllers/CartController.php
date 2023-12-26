@@ -159,4 +159,16 @@ class CartController extends Controller
             'success' => 'Successfully Update Your Cart Quantity',
         ]);
     }
+
+    // increment cart quantity
+    public function incCartQty($cart_id){
+
+        Cart::update($cart_id, array(
+            'quantity' => +1,
+          ));
+
+        return response()->json([
+            'success' => 'Successfully Update Your Cart Quantity',
+        ]);
+    }
 }

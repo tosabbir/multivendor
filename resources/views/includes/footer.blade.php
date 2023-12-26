@@ -766,7 +766,7 @@
                                         <div class="detail-qty border radius">
                                             <a onclick="decCartQty(${value.id})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                             <input type="text" name="quantity" class="qty-val" value="${value.quantity}" min="1">
-                                            <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                            <a onclick="incCartQty(${value.id})" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
                                     </div>
                                 </td>
@@ -821,6 +821,34 @@
             $.ajax({
                 type: "get",
                 url: "{{url('/dec/cart/qty')}}/"+cart_id,
+                dataType: "json",
+                success: function (response) {
+
+                    addToMiniCart();
+                    myCarts();
+
+                    Swal.fire({
+                    position: "top-end",
+                    toast: true,
+                    icon: "success",
+                    title: "Successfully Update Your Cart Quantity",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+
+
+                }
+            });
+        }
+
+
+         // inc cart quantity
+         function incCartQty(cart_id){
+
+
+            $.ajax({
+                type: "get",
+                url: "{{url('/inc/cart/qty')}}/"+cart_id,
                 dataType: "json",
                 success: function (response) {
 
