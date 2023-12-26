@@ -61,7 +61,7 @@ class SubCategoryController extends Controller
                 'category_slug' => $category_slug,
                 'sub_category_status' => 1,
                 'sub_category_image' => $customeName,
-                'sub_category_creator' => Auth::user()->id,
+                'sub_category_creator' => Auth::user()->user_id,
                 'created_at' => Carbon::now(),
 
             ]);
@@ -142,7 +142,7 @@ class SubCategoryController extends Controller
             'category_slug' => $category_slug,
             'sub_category_slug' => $slug,
             'sub_category_status' => $request->sub_category_status,
-            'sub_category_editor' => Auth::user()->id,
+            'sub_category_editor' => Auth::user()->user_id,
             'updated_at' => Carbon::now(),
 
         ]);
@@ -173,7 +173,7 @@ class SubCategoryController extends Controller
         $update = Subcategory::where('sub_category_slug', $slug)->update([
             'deleted_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'sub_category_editor' => Auth::user()->id,
+            'sub_category_editor' => Auth::user()->user_id,
         ]);
 
         if($update){
@@ -209,7 +209,7 @@ class SubCategoryController extends Controller
         $update = Subcategory::where('sub_category_slug', $slug)->update([
             'deleted_at' => null,
             'updated_at' => Carbon::now(),
-            'sub_category_editor' => Auth::user()->id,
+            'sub_category_editor' => Auth::user()->user_id,
         ]);
 
         if($update){

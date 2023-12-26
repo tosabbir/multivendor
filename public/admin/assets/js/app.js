@@ -249,4 +249,16 @@ function show_sub_category_update_button(){
     document.getElementById('sub_category_data_update_btn_block').style.display = "block";
 };
 
+// coupon data update button
+let coupon_data_update_btn_block = document.getElementById('coupon_data_update_btn_block');
+let coupon_data_reset_btn = document.getElementById('coupon_data_reset_btn');
+coupon_data_reset_btn.addEventListener('click', ()=>{
+    document.getElementById('coupon_data_update_btn_block').style.display = "none";
+
+});
+
+function show_coupon_update_button(){
+    document.getElementById('coupon_data_update_btn_block').style.display = "block";
+};
+
 

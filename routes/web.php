@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
@@ -126,6 +127,20 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/recycle/product', 'recycle')->name('admin.recycle.product');
         Route::get('/admin/product/restore/{slug}', 'restore')->name('admin.product.restore');
         Route::get('/admin/product/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.product.permanentlyDelete');
+    });
+
+
+    // all admin coupon related route
+    Route::controller(CouponController::class)->group(function(){
+        Route::get('/admin/all/coupon', 'index')->name('admin.all.coupon');
+        Route::get('/admin/add/coupon', 'create')->name('admin.add.coupon');
+        Route::post('/admin/coupon/store', 'store')->name('admin.coupon.store');
+        Route::get('/admin/coupon/edit/{slug}', 'edit')->name('admin.coupon.edit');
+        Route::post('/admin/coupon/update', 'update')->name('admin.coupon.update');
+        Route::get('/admin/coupon/delete/{slug}', 'softDelete')->name('admin.coupon.delete');
+        Route::get('/admin/recycle/coupon', 'recycle')->name('admin.recycle.coupon');
+        Route::get('/admin/restore/coupon/{slug}', 'restore')->name('admin.coupon.restore');
+        Route::get('/admin/coupon/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.coupon.permanentlyDelete');
     });
 
 });
