@@ -61,4 +61,13 @@ class CompareController extends Controller
 
         return back()->with($notification);
     }
+
+     // count compare
+     public function countCompare(){
+
+        $compareCount = Compare::where('user_id', Auth::user()->user_id)->count();
+        return response()->json([
+            'compareCount' => $compareCount,
+        ]);
+    }
 }

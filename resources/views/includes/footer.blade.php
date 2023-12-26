@@ -614,7 +614,7 @@
                         Swal.fire({
                         position: "top-end",
                         icon: "success",
-                     
+
                         toast: true,
                         title: response.success,
                         showConfirmButton: false,
@@ -700,6 +700,23 @@
             }
 
         // add to compare end
+
+        // count compare start
+
+        function countCompare(){
+
+            $.ajax({
+                type: "get",
+                url: "/count/compare",
+                dataType: "json",
+                success: function (response) {
+                    $('#compareCount').text(response.compareCount);
+                }
+            });
+            }
+            countCompare();
+            // count compare end
+
 
     </script>
 </body>
