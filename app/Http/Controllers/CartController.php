@@ -117,6 +117,7 @@ class CartController extends Controller
         ]);
     }
 
+
     // all cart in cart page
     public function allCart(){
         return view('cart');
@@ -134,5 +135,15 @@ class CartController extends Controller
             // 'cartSubTotal' => $cartSubTotal,
         ));
 
+    }
+
+    // remove cart item
+    public function removeCartItem($cart_id){
+
+        Cart::remove($cart_id);
+
+        return response()->json([
+            'success' => 'Successfully remove from your cart',
+        ]);
     }
 }

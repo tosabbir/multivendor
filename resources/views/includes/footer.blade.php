@@ -542,6 +542,8 @@
                 success: function (response) {
 
                     addToMiniCart();
+                    myCarts();
+                    
                     Swal.fire({
                     position: "top-end",
                     toast: true,
@@ -771,7 +773,7 @@
                                 <td class="price" data-title="Price">
                                     <h4 class="text-brand">$${(value.quantity * value.price)} </h4>
                                 </td>
-                                <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                                <td class="action text-center" data-title="Remove"><a type="button" onclick="removeCart(${value.id})" class="text-body"><i class="fi-rs-trash"></i></a></td>
                             </tr>
                         `
                     });
@@ -784,6 +786,32 @@
         myCarts();
         // load to cart page end
 
+         // remove cart form cart page
+         function removeCart(cart_id){
+
+
+            $.ajax({
+                type: "get",
+                url: "{{url('/remove/cart/item')}}/"+cart_id,
+                dataType: "json",
+                success: function (response) {
+
+                    addToMiniCart();
+                    myCarts();
+
+                    Swal.fire({
+                    position: "top-end",
+                    toast: true,
+                    icon: "success",
+                    title: "Successfully Remove From your cart",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+
+
+                }
+            });
+        }
 
 
     </script>

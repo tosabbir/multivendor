@@ -235,6 +235,9 @@ Route::controller(FrontendController::class)->group(function(){
         // load cart item in cart page
         Route::get('/my/carts', 'myCart');
 
+        // remove cart item
+        Route::get('/remove/cart/item/{id}', 'removeCartItem');
+
 
 
     });
