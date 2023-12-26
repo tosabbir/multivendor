@@ -224,6 +224,10 @@ Route::controller(FrontendController::class)->group(function(){
 
         Route::get('/remove/mini/cart/item/{id}', 'removeMiniCartItem');
 
+        Route::get('/all/cart', 'allCart');
+
+
+
     });
 
 });

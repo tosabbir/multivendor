@@ -116,4 +116,9 @@ class CartController extends Controller
             'success' => 'Successfully remove from your cart',
         ]);
     }
+
+    // all cart in cart page
+    public function allCart(){
+        return view('cart');
+    }
 }

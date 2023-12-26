@@ -146,12 +146,12 @@
                                     {{-- <a href="{{route('all.wishlist')}}"><span class="lable">Wishlist</span></a> --}}
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a class="mini-cart-icon" href="shop-cart.html">
+                                    <a class="mini-cart-icon" href="{{url('/all/cart')}}">
                                         <img alt="Nest"
                                             src="{{ asset('frontend') }}/assets/imgs/theme/icons/icon-cart.svg" />
                                         <span class="pro-count blue" id="miniCount"></span>
                                     </a>
-                                    <a href="shop-cart.html"><span class="lable">Cart</span></a>
+                                    <a href="{{url('/all/cart')}}"><span class="lable">Cart</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                         <ul id="miniCart">
 
