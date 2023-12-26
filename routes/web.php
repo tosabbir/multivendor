@@ -238,6 +238,9 @@ Route::controller(FrontendController::class)->group(function(){
         // remove cart item
         Route::get('/remove/cart/item/{id}', 'removeCartItem');
 
+        // decrement cart quantity
+        Route::get('/dec/cart/qty/{id}', 'decCartQty');
+
 
 
     });

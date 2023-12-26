@@ -146,4 +146,17 @@ class CartController extends Controller
             'success' => 'Successfully remove from your cart',
         ]);
     }
+
+
+    // decrement cart quantity
+    public function decCartQty($cart_id){
+
+        Cart::update($cart_id, array(
+            'quantity' => -1,
+          ));
+
+        return response()->json([
+            'success' => 'Successfully Update Your Cart Quantity',
+        ]);
+    }
 }

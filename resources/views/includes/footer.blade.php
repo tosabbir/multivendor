@@ -543,7 +543,7 @@
 
                     addToMiniCart();
                     myCarts();
-                    
+
                     Swal.fire({
                     position: "top-end",
                     toast: true,
@@ -764,7 +764,7 @@
                                 <td class="text-center detail-info" data-title="Stock">
                                     <div class="detail-extralink mr-15">
                                         <div class="detail-qty border radius">
-                                            <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                            <a onclick="decCartQty(${value.id})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                             <input type="text" name="quantity" class="qty-val" value="${value.quantity}" min="1">
                                             <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                         </div>
@@ -804,6 +804,34 @@
                     toast: true,
                     icon: "success",
                     title: "Successfully Remove From your cart",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+
+
+                }
+            });
+        }
+
+
+         // dec cart quantity
+         function decCartQty(cart_id){
+
+
+            $.ajax({
+                type: "get",
+                url: "{{url('/dec/cart/qty')}}/"+cart_id,
+                dataType: "json",
+                success: function (response) {
+
+                    addToMiniCart();
+                    myCarts();
+
+                    Swal.fire({
+                    position: "top-end",
+                    toast: true,
+                    icon: "success",
+                    title: "Successfully Update Your Cart Quantity",
                     showConfirmButton: false,
                     timer: 1500
                     });
