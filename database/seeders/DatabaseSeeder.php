@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\District;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +22,10 @@ class DatabaseSeeder extends Seeder
             CategoryTableSeeder::class,
             SubcategoryTableSeeder::class,
             BrandTableSeeder::class,
+            CouponTableSeeder::class,
+            DivisionTableSeeder::class,
+            DistrictTableSeeder::class,
+            PoliceStationTableSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

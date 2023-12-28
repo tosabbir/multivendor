@@ -729,7 +729,9 @@
                 url: "/my/carts",
                 dataType: "json",
                 success: function (response) {
-
+                    $('#totalCartItem').text(response.cartQuantity);
+                    $('#cartTotal').text('$'+response.cartSubTotal);
+                    $('#grandTotal').text('$'+response.cartSubTotal);
                     var myCarts = " ";
                     $.each(response.myCarts, function (key, value) {
 
@@ -764,6 +766,7 @@
                                 </td>
                                 <td class="text-center detail-info" data-title="Stock">
                                     <div class="detail-extralink mr-15">
+
                                         <div class="detail-qty border radius">
                                             <a onclick="decCartQty(${value.id})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
                                             <input type="text" name="quantity" class="qty-val" value="${value.quantity}" min="1">
@@ -771,6 +774,7 @@
                                         </div>
                                     </div>
                                 </td>
+
                                 <td class="price" data-title="Price">
                                     <h4 class="text-brand">$${(value.quantity * value.price)} </h4>
                                 </td>

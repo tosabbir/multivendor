@@ -16,8 +16,8 @@
             <div class="col-lg-8 mb-40">
                 <h1 class="heading-2 mb-10">Your Cart</h1>
                 <div class="d-flex justify-content-between">
-                    <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
-                 
+                    <h6 class="text-body">There are <span class="text-brand" id="totalCartItem"></span> products in your cart</h6>
+
                 </div>
             </div>
         </div>
@@ -36,6 +36,7 @@
                                 <th scope="col">Size</th>
                                 <th scope="col">Color</th>
                                 <th scope="col">Quantity</th>
+
                                 <th scope="col">Subtotal</th>
                                 <th scope="col" class="end">Remove</th>
                             </tr>
@@ -79,35 +80,33 @@
                                         <h6 class="text-muted">Subtotal</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h4 class="text-brand text-end">$12.31</h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="col" colspan="2">
-                                        <div class="divider-2 mt-10 mb-10"></div>
+                                        <h4 class="text-brand text-end" id="cartTotal"></h4>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="cart_total_label">
-                                        <h6 class="text-muted">Shipping</h6>
+                                        <h6 class="text-muted">Coupon Code</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h5 class="text-heading text-end">Free</h4</td> </tr> <tr>
-                                    <td class="cart_total_label">
-                                        <h6 class="text-muted">Estimate for</h6>
-                                    </td>
-                                    <td class="cart_total_amount">
-                                        <h5 class="text-heading text-end">United Kingdom</h4</td> </tr> <tr>
-                                    <td scope="col" colspan="2">
-                                        <div class="divider-2 mt-10 mb-10"></div>
+                                        <h4 class="text-brand text-end" id="couponCode">N/A</h4>
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td class="cart_total_label">
-                                        <h6 class="text-muted">Total</h6>
+                                        <h6 class="text-muted">Coupon Descount</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h4 class="text-brand text-end">$12.31</h4>
+                                        <h4 class="text-brand text-end" id="couponDescount">N/A</h4>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="cart_total_label">
+                                        <h6 class="text-muted">Grand Total</h6>
+                                    </td>
+                                    <td class="cart_total_amount">
+                                        <h4 class="text-brand text-end" id="grandTotal"></h4>
                                     </td>
                                 </tr>
                             </tbody>

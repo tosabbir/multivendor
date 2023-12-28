@@ -66,6 +66,7 @@ class CartController extends Controller
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
+                    // 'product_quantity_type' => $product->product_quantity_type,
                 ],
             ]);
 
@@ -82,6 +83,7 @@ class CartController extends Controller
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
+                    // 'product_quantity_type' => $product->product_quantity_type,
                 ],
             ]);
 
@@ -131,8 +133,8 @@ class CartController extends Controller
 
         return response()->json(array(
             'myCarts' => $carts,
-            // 'cartQuantity' => $cartQuantity,
-            // 'cartSubTotal' => $cartSubTotal,
+            'cartQuantity' => $cartQuantity,
+            'cartSubTotal' => $cartSubTotal,
         ));
 
     }
