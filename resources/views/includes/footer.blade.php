@@ -180,8 +180,6 @@
                         @endauth
 
 
-
-
                         <li><a href="#">Affiliate Program</a></li>
                         <li><a href="#">Farm Business</a></li>
                         <li><a href="#">Farm Careers</a></li>
@@ -248,8 +246,8 @@
     </div>
 </footer>
 
-{{-- <!-- Preloader Start -->
-<div id="preloader-active">
+<!-- Preloader Start -->
+{{-- <div id="preloader-active">
     <div class="preloader d-flex align-items-center justify-content-center">
         <div class="preloader-inner position-relative">
             <div class="text-center">
@@ -534,7 +532,6 @@
 
         // remove cart form mini cart
         function removeCartFromMiniCart(cart_id){
-
 
             $.ajax({
                 type: "get",
@@ -827,6 +824,9 @@
                 type: "get",
                 url: "{{url('/dec/cart/qty')}}/"+cart_id,
                 dataType: "json",
+                // beforeSend: function () {
+                //     $("#preloader-active").css("display", "block");
+                // },
                 success: function (response) {
 
                     addToMiniCart();
@@ -840,9 +840,10 @@
                     showConfirmButton: false,
                     timer: 1500
                     });
-
-
                 }
+                // complete: function() {
+                //     $("#preloader-active").css("display", "none");
+                // }
             });
         }
 
@@ -855,6 +856,9 @@
                 type: "get",
                 url: "{{url('/inc/cart/qty')}}/"+cart_id,
                 dataType: "json",
+                // beforeSend: function () {
+                //     $("#preloader-active").css("display", "block");
+                // },
                 success: function (response) {
 
                     addToMiniCart();
@@ -870,7 +874,10 @@
                     });
 
 
-                }
+                },
+                // complete: function() {
+                //     $("#preloader-active").css("display", "none");
+                // }
             });
         }
 
@@ -900,6 +907,8 @@
                                 $('#grandTotal').text(response.price);
                                 $('#couponCode').text(response.coupon_code);
                                 $('#couponDescount').text(response.coupon_discount);
+
+                                $('#couponApplyInput').hide();
 
                                 Swal.fire({
                                 position: "top-end",

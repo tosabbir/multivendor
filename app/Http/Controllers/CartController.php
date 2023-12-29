@@ -7,6 +7,7 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -189,6 +190,14 @@ class CartController extends Controller
 
             if($couponValidity != null){
                 $price = $subtotal - $coupon->coupon_discount;
+
+
+                Session::put('couponPrice', [
+                    'coupon_code' => $coupon->coupon_code,
+                    'coupon_discount' => $coupon->coupon_discount,
+                    'price' => $price,
+                ]);
+
                 return response()->json([
                     'success' => 'Coupon Apply Successfully',
                     'coupon_code' => $coupon->coupon_code,
@@ -207,5 +216,43 @@ class CartController extends Controller
                 'unmatchError' => '!Sorry This Is Not Our Coupon Code',
             ]);
         }
+    }
+
+    public function checkout(){
+
+        if(Auth::check()){
+
+            $carts = Cart::getContent();
+            $cartQuantity = $carts->count();;
+
+            if($cartQuantity > 0){
+
+                $carts = Cart::getContent();
+                $cartQuantity = $carts->count();;
+                $cartSubTotal = Cart::getSubTotal();
+
+                return view('checkout', compact('carts', 'cartQuantity', 'cartSubTotal'));
+
+            }else{
+                $notification = array(
+                    'message' => "Please Shop Minimum One Item",
+                    'alert-type' => "error",
+                );
+
+                return back()->with($notification);
+            }
+
+        }else{
+
+
+            $notification = array(
+                'message' => "You Have To Log In First",
+                'alert-type' => "error",
+            );
+
+            return redirect()->route('login')->with($notification);
+        }
+
+
     }
 }

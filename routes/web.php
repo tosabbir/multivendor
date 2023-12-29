@@ -262,6 +262,9 @@ Route::controller(FrontendController::class)->group(function(){
         // find coupon here form user input
         Route::get('/apply/coupon/{coupon_code}', 'findCoupon');
 
+        // find coupon here form user input
+        Route::get('/checkout', 'checkout')->name('checkout');
+
 
     });
 
