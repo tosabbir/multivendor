@@ -87,4 +87,6 @@ class FrontendController extends Controller
         'product_multi_img' => $product_multi_img
       ));
     }
+
+
 }

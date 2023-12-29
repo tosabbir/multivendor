@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Coupon;
 use App\Models\Product;
+use Carbon\Carbon;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -172,5 +175,37 @@ class CartController extends Controller
         return response()->json([
             'success' => 'Successfully Update Your Cart Quantity',
         ]);
+    }
+
+    // find coupon here
+    public function findCoupon(Request $request, $coupon_code){
+        $coupon = Coupon::where('coupon_code', $coupon_code)->first();
+        $subtotal = $request->subtotal;
+        if($coupon != null){
+
+            $couponValidity = Coupon::where('coupon_code', $coupon_code)
+            ->where('coupon_validity', '>=', Carbon::now()->toDateTimeString())
+            ->first();
+
+            if($couponValidity != null){
+                $price = $subtotal - $coupon->coupon_discount;
+                return response()->json([
+                    'success' => 'Coupon Apply Successfully',
+                    'coupon_code' => $coupon->coupon_code,
+                    'coupon_discount' => $coupon->coupon_discount,
+                    'price' => $price,
+                ]);
+
+            }else{
+                return response()->json([
+                    'validityError' => '!Sorry This Coupon Validity Already Expired',
+                ]);
+            }
+
+        }else{
+            return response()->json([
+                'unmatchError' => '!Sorry This Is Not Our Coupon Code',
+            ]);
+        }
     }
 }

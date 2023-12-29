@@ -259,6 +259,8 @@ Route::controller(FrontendController::class)->group(function(){
         // increment cart quantity
         Route::get('/inc/cart/qty/{id}', 'incCartQty');
 
+        // find coupon here form user input
+        Route::get('/apply/coupon/{coupon_code}', 'findCoupon');
 
 
     });

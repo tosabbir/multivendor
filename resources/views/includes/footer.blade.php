@@ -730,8 +730,8 @@
                 dataType: "json",
                 success: function (response) {
                     $('#totalCartItem').text(response.cartQuantity);
-                    $('#cartTotal').text('$'+response.cartSubTotal);
-                    $('#grandTotal').text('$'+response.cartSubTotal);
+                    $('#cartTotal').text(response.cartSubTotal);
+                    $('#grandTotal').text(response.cartSubTotal);
                     var myCarts = " ";
                     $.each(response.myCarts, function (key, value) {
 
@@ -874,6 +874,72 @@
             });
         }
 
+        // apply coupon
+        function applyCoupon(){
+
+            var coupon_code = $('#coupon_code').val();
+            if (!coupon_code) {
+                alert('please apply a coupon code');
+            }else{
+                var subtotal = $('#cartTotal').text();
+
+                $.ajax({
+                    type: "get",
+                    url: "/apply/coupon/"+coupon_code,
+                    data: {
+                        subtotal:subtotal,
+                    },
+                    dataType: "json",
+                    success: function (response) {
+
+                        if($.isEmptyObject(response.unmatchError)){
+
+                            if($.isEmptyObject(response.validityError)){
+
+                                $('#cartTotal').text(response.price);
+                                $('#grandTotal').text(response.price);
+                                $('#couponCode').text(response.coupon_code);
+                                $('#couponDescount').text(response.coupon_discount);
+
+                                Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                type: 'success',
+                                toast: true,
+                                title: response.success,
+                                showConfirmButton: false,
+                                timer: 1500
+                                });
+                            }else{
+
+                                Swal.fire({
+                                position: "top-end",
+                                icon: "error",
+                                type: 'error',
+                                toast: true,
+                                title: response.validityError,
+                                showConfirmButton: false,
+                                timer: 2500
+                                });
+                            }
+
+                        }else{
+
+                            Swal.fire({
+                            position: "top-end",
+                            icon: "error",
+                            type: 'error',
+                            toast: true,
+                            title: response.unmatchError,
+                            showConfirmButton: false,
+                            timer: 2500
+                            });
+                        }
+                    }
+                });
+
+            }
+        }
 
     </script>
 </body>

@@ -44,7 +44,7 @@ class CouponController extends Controller
             'coupon_discount' => $request->coupon_discount,
             'coupon_validity' => $request->coupon_validity,
             'coupon_creator' => Auth::user()->user_id,
-            'created_at' => Carbon::now()->toDateString(),
+            'created_at' => Carbon::now()->toDateTimeString(),
 
         ]);
 
