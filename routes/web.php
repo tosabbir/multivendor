@@ -266,6 +266,16 @@ Route::controller(FrontendController::class)->group(function(){
         Route::get('/checkout', 'checkout')->name('checkout');
 
 
+        // // all user route after login
+        Route::middleware(['auth','role:4','verified'])->group(function(){
+
+            // find district
+            Route::get('/find/district/{division_id}', 'findDistrict');
+
+            // find district
+            Route::get('/find/police/station/{division_id}', 'findPoliceStation');
+
+        });
     });
 
 });

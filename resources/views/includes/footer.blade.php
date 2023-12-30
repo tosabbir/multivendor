@@ -318,6 +318,7 @@
 
         {{-- for sub category load  --}}
     <script>
+        // category subcategory dpendency
         $(document).ready(function() {
 
             $('#category_id').on('change', function() {
@@ -349,6 +350,7 @@
 
     {{-- product quick view  --}}
     <script>
+
         function productView(id) {
 
             $.ajax({
@@ -950,6 +952,55 @@
             }
         }
 
+        // find district
+        function findDistrict(){
+
+            $division_id = $('#divisions').val();
+
+            $.ajax({
+                type: "GET",
+                url: "{{ url('/find/district') }}/" + $division_id,
+
+                dataType: "json",
+                success: function(data) {
+                    $district = $('#district').html('');
+                    $('#district').empty();
+                    $.each(data, function(key, value) {
+                        $district.append('<option value = "' +
+                            value.district_id + '">' +
+                            value.district_name + '</option>');
+
+                    });
+                }
+            });
+
+        };
+
+        // find police station
+
+        function findPoliceStation(){
+
+            $district_id = $('#district').val();
+
+            $.ajax({
+                type: "GET",
+                url: "{{ url('/find/police/station') }}/" + $district_id,
+
+                dataType: "json",
+                success: function(data) {
+                    $policeStation = $('#policeStation').html('');
+                    $('#policeStation').empty();
+                    $.each(data, function(key, value) {
+                        $policeStation.append('<option value = "' +
+                            value.police_station_id + '">' +
+                            value.police_station_name + '</option>');
+
+                    });
+                }
+            });
+
+        }
+     
     </script>
 </body>
 

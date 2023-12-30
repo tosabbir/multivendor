@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Coupon;
+use App\Models\District;
+use App\Models\Division;
+use App\Models\PoliceStation;
 use App\Models\Product;
 use Carbon\Carbon;
 use Cart;
@@ -230,8 +233,10 @@ class CartController extends Controller
                 $carts = Cart::getContent();
                 $cartQuantity = $carts->count();;
                 $cartSubTotal = Cart::getSubTotal();
-
-                return view('checkout', compact('carts', 'cartQuantity', 'cartSubTotal'));
+                $divisions = Division::OrderBy('division_name', 'ASC')->get();
+                $districts = District::OrderBy('district_name', 'ASC')->get();
+                $policeStations = PoliceStation::OrderBy('police_station_name', 'ASC')->get();
+                return view('checkout', compact('carts', 'cartQuantity', 'cartSubTotal', 'divisions', 'districts', 'policeStations'));
 
             }else{
                 $notification = array(
@@ -255,4 +260,18 @@ class CartController extends Controller
 
 
     }
+
+    // find district here
+    public function findDistrict($division_id){
+        $allDistrict = District::where('division_id', $division_id)->orderBy('district_name', 'ASC')->get();
+        return json_decode($allDistrict);
+    }
+
+    // find police station here
+    public function findPoliceStation($district_id){
+        $allPoliceStation = PoliceStation::where('district_id', $district_id)->orderBy('police_station_name', 'ASC')->get();
+        return json_decode($allPoliceStation);
+    }
+
+
 }
