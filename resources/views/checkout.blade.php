@@ -22,15 +22,15 @@
 
                 <div class="row">
                     <h4 class="mb-30">Billing Details</h4>
-                    <form method="post">
-
+                    <form method="post" action="{{ route('checkout.store')}}">
+                        @csrf
 
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <input type="text" required="" name="username" placeholder="User Name *" value="{{Auth::user()->username}}">
+                                <input type="text" required="" name="shipping_name" placeholder="User Name *" value="{{Auth::user()->username}}">
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="email" required="" name="email" placeholder="Email *" value="{{Auth::user()->email}}">
+                                <input type="email" required="" name="shipping_email" placeholder="Email *" value="{{Auth::user()->email}}">
                             </div>
                         </div>
 
@@ -38,7 +38,7 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active" id="divisions" onchange="findDistrict()">
+                                    <select class="form-control select-active" id="divisions" onchange="findDistrict()" name="shipping_division_id">
                                         <option value=" ">Select a Divission...</option>
                                         @foreach ($divisions as $division)
 
@@ -49,14 +49,14 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="city" placeholder="Phone*" value="{{Auth::user()->phone}}">
+                                <input required="" type="text" name="shipping_phone" placeholder="Phone*" value="{{Auth::user()->phone}}">
                             </div>
                         </div>
 
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active" id="district" onchange="findPoliceStation()">
+                                    <select class="form-control select-active" id="district" name="shipping_district_id" onchange="findPoliceStation()">
                                         <option value=" ">Please Select Divission First</option>
                                         {{-- district add from ajax  --}}
 
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="city" placeholder="Post Code *">
+                                <input required="" type="text" name="shipping_post_code" placeholder="Post Code *">
                             </div>
                         </div>
 
@@ -72,7 +72,7 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active" id="policeStation">
+                                    <select class="form-control select-active" id="policeStation" name="shipping_police_station_id">
 
                                         <option value=" ">Please Select District First</option>
                                         {{-- police station load from ajax  --}}
@@ -81,17 +81,17 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="city" placeholder="Address *" value="{{Auth::user()->address}}">
+                                <input required="" type="text" name="shipping_address" placeholder="Address *" value="{{Auth::user()->address}}">
                             </div>
                         </div>
 
 
                         <div class="form-group mb-30">
-                            <textarea rows="5" placeholder="Additional information"></textarea>
+                            <textarea rows="5" placeholder="Additional information" name="shipping_additional_information"></textarea>
                         </div>
 
 
-                    </form>
+
                 </div>
             </div>
 
@@ -203,7 +203,7 @@
                                         <h6 class="text-muted">Coupn Name</h6>
                                     </td>
                                     <td class="cart_total_amount">
-                                        <h6 class="text-brand text-end">EASYLEA</h6>
+                                        <h6 class="text-brand text-end">N/A</h6>
                                     </td>
                                 </tr>
 
@@ -229,29 +229,25 @@
 
                         @endif
 
-
-
-
-
                     </div>
                 </div>
                 <div class="payment ml-30">
                     <h4 class="mb-30">Payment</h4>
                     <div class="payment_option">
                         <div class="custome-radio">
-                            <input class="form-check-input" required="" type="radio" name="payment_option"
+                            <input class="form-check-input" required="" type="radio" value="stripe" name="payment_option"
                                 id="exampleRadios3" checked="">
                             <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse"
-                                data-target="#bankTranfer" aria-controls="bankTranfer">Direct Bank Transfer</label>
+                                data-target="#bankTranfer" aria-controls="bankTranfer">Stripe</label>
                         </div>
                         <div class="custome-radio">
-                            <input class="form-check-input" required="" type="radio" name="payment_option"
+                            <input class="form-check-input" required="" type="radio" value="cash" name="payment_option"
                                 id="exampleRadios4" checked="">
                             <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse"
                                 data-target="#checkPayment" aria-controls="checkPayment">Cash on delivery</label>
                         </div>
                         <div class="custome-radio">
-                            <input class="form-check-input" required="" type="radio" name="payment_option"
+                            <input class="form-check-input" required="" type="radio" value="card" name="payment_option"
                                 id="exampleRadios5" checked="">
                             <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
                                 data-target="#paypal" aria-controls="paypal">Online Getway</label>
@@ -263,9 +259,11 @@
                         <img class="mr-15" src="{{asset('frontend')}}/assets/imgs/theme/icons/payment-master.svg" alt="">
                         <img src="{{asset('frontend')}}/assets/imgs/theme/icons/payment-zapper.svg" alt="">
                     </div>
-                    <a href="#" class="btn btn-fill-out btn-block mt-30">Place an Order<i
-                            class="fi-rs-sign-out ml-15"></i></a>
+                    <button class="btn btn-fill-out btn-block mt-30" type="submit">Place An Order</button>
+                    {{-- <a href="#" class="btn btn-fill-out btn-block mt-30">Place an Order<i
+                            class="fi-rs-sign-out ml-15"></i></a> --}}
                 </div>
+            </form>
             </div>
         </div>
     </div>

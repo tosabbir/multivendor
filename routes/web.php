@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Products\ProductsController;
@@ -278,6 +279,15 @@ Route::controller(FrontendController::class)->group(function(){
         });
     });
 
+});
+// // all checkout related route here
+Route::middleware(['auth','role:4','verified'])->group(function(){
+
+    Route::controller(CheckoutController::class)->group(function(){
+        // checkout store
+        Route::post('/checkout/store', 'Store')->name('checkout.store');
+
+    });
 });
 
 // all wishlist related route here before login
