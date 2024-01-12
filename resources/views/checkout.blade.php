@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="shipping_post_code" placeholder="Post Code *">
+                                <input type="text" name="shipping_post_code" placeholder="Post Code *">
                             </div>
                         </div>
 

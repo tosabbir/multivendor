@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Cart;
 use Illuminate\Http\Request;
+
 
 class CheckoutController extends Controller
 {
@@ -23,8 +25,10 @@ class CheckoutController extends Controller
         $shipping_data['shipping_address'] = $request->shipping_address;
         $shipping_data['shipping_additional_information'] = $request->shipping_additional_information;
 
+        $cartSubTotal = Cart::getSubTotal();
+
         if ($request->payment_option == 'stripe') {
-            return view('payment.stripe', compact('shipping_data'));
+            return view('payment.stripe', compact('shipping_data','cartSubTotal'));
         }elseif($request->payment_option == 'card'){
             return view('payment.card', compact('shipping_data'));
         }else{

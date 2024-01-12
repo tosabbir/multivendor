@@ -956,7 +956,7 @@
         function findDistrict(){
 
             $division_id = $('#divisions').val();
-
+            $policeStation = $('#policeStation').html('');
             $.ajax({
                 type: "GET",
                 url: "{{ url('/find/district') }}/" + $division_id,
@@ -1000,7 +1000,7 @@
             });
 
         }
-     
+
     </script>
 </body>
 
