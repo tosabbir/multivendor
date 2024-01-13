@@ -366,6 +366,7 @@
                         $('#vendor_shop_name').html(" ");
                     }else{
                         $('#vendor_shop_name').html(data.product.vendor_info.vendor_shop_name);
+                        $('#vendor_id').html(data.product.vendor_info.user_id);
 
                     }
                     if(data.product.vendor_info == null){
@@ -455,13 +456,14 @@
             var product_size = $('#product_size option:selected').text();
             var product_quantity = $('#quantity').val();
             var product_descount_price = $('#product_descount_price').text();
+            var vendor_id = $('#vendor_id').text();
 
 
             $.ajax({
                 type: "POST",
                 url: "{{url('/product/add/to/cart')}}/"+product_id,
                 data: {
-                    product_name:product_name, product_color:product_color, product_size:product_size, product_quantity:product_quantity, product_descount_price:product_descount_price
+                    product_name:product_name, product_color:product_color, product_size:product_size, product_quantity:product_quantity, product_descount_price:product_descount_price,vendor_id:vendor_id
                 },
                 dataType: "json",
 
@@ -573,12 +575,13 @@
             var product_size = $('#dproduct_size option:selected').text();
             var product_quantity = $('#dquantity').val();
             var product_descount_price = $('#dproduct_descount_price').text();
+            var pd_vendor_id = $('#pd_vendor_id').text();
 
             $.ajax({
                 type: "POST",
                 url: "{{url('/product/add/to/cart/from/details/page')}}/"+product_id,
                 data: {
-                    product_name:product_name, product_color:product_color, product_size:product_size, product_quantity:product_quantity, product_descount_price:product_descount_price
+                    product_name:product_name, product_color:product_color, product_size:product_size, product_quantity:product_quantity, product_descount_price:product_descount_price,pd_vendor_id:pd_vendor_id
                 },
                 dataType: "json",
                 success: function (data) {

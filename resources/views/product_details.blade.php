@@ -156,6 +156,7 @@
 @endphp  @foreach ($product_tags as $product_tag)
 <span class="text-brand">{{$product_tag}}</span>
 @endforeach </li>
+<li class="mb-5">Vendor Id: <span class="text-brand " id="pd_vendor_id">{{$product->vendor_id}}</span></li>
 <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
 </ul>
 </div>

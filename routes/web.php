@@ -10,6 +10,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Order\CashController;
+use App\Http\Controllers\Order\StripeController;
 use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
@@ -322,6 +324,27 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
         Route::get('/remove/compare/{id}', 'removeCompare')->name('remove.compare');
     });
 });
+
+// // all Stripe Order related route here
+Route::middleware(['auth','role:4','verified'])->group(function(){
+
+    // Order take with stripe
+    Route::controller(StripeController::class)->group(function(){
+        Route::post('/stripe/order', 'stripeOrder')->name('stripe.order');
+
+    });
+
+    // Order take with cash on delivery
+    Route::controller(CashController::class)->group(function(){
+        // checkout store
+        Route::post('/cash/order', 'cashOrder')->name('cash.order');
+
+    });
+});
+
+
+
+
 
 
 // Route::get('/dashboard', function () {

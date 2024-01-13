@@ -108,6 +108,7 @@
                                     <div class="font-xs">
                                         <ul>
                                             <li class="mb-5">Vendor: <span class="text-brand " id="vendor_shop_name"> </span></li>
+                                            <li class="mb-5">Vendor Id: <span class="text-brand " id="vendor_id"> </span></li>
                                             <li class="mb-5">Code:<span class="text-brand" id="product_code"> </span></li>
                                         </ul>
                                     </div>

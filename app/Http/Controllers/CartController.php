@@ -18,6 +18,10 @@ class CartController extends Controller
      //add to cart
      public function productAddToCart(Request $request, $id){
 
+        if(Session::has('couponPrice')){
+            Session::forget('couponPrice');
+        }
+
         $product = Product::findOrFail($id);
 
         if($product->product_discount_price == null){
@@ -31,6 +35,7 @@ class CartController extends Controller
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
+                    'vendor_id' => $request->vendor_id,
                 ],
             ]);
 
@@ -47,6 +52,7 @@ class CartController extends Controller
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
+                    'vendor_id' => $request->vendor_id,
                 ],
             ]);
 
@@ -60,6 +66,10 @@ class CartController extends Controller
      //add to cart from product details page
      public function productAddToCartFromDetailsPage(Request $request, $id){
 
+        if(Session::has('couponPrice')){
+            Session::forget('couponPrice');
+        }
+
         $product = Product::findOrFail($id);
 
         if($product->product_discount_price == null){
@@ -73,6 +83,7 @@ class CartController extends Controller
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
+                    'vendor_id' => $request->pd_vendor_id,
                     // 'product_quantity_type' => $product->product_quantity_type,
                 ],
             ]);
@@ -90,6 +101,7 @@ class CartController extends Controller
                     'image' => $product->product_thumbnail,
                     'color' => $request->product_color,
                     'size' => $request->product_size,
+                    'vendor_id' => $request->pd_vendor_id,
                     // 'product_quantity_type' => $product->product_quantity_type,
                 ],
             ]);
@@ -103,6 +115,7 @@ class CartController extends Controller
 
     // get in mini cart
     public function productAddToMiniCart(){
+
         $carts = Cart::getContent();
         $cartQuantity = $carts->count();;
         $cartSubTotal = Cart::getSubTotal();
@@ -118,6 +131,10 @@ class CartController extends Controller
 
     // remove mini cart item
     public function removeMiniCartItem($cart_id){
+
+        if(Session::has('couponPrice')){
+            Session::forget('couponPrice');
+        }
 
         Cart::remove($cart_id);
 
@@ -149,6 +166,10 @@ class CartController extends Controller
     // remove cart item
     public function removeCartItem($cart_id){
 
+        if(Session::has('couponPrice')){
+            Session::forget('couponPrice');
+        }
+
         Cart::remove($cart_id);
 
         return response()->json([
@@ -159,6 +180,10 @@ class CartController extends Controller
 
     // decrement cart quantity
     public function decCartQty($cart_id){
+
+        if(Session::has('couponPrice')){
+            Session::forget('couponPrice');
+        }
 
         Cart::update($cart_id, array(
             'quantity' => -1,
@@ -171,6 +196,10 @@ class CartController extends Controller
 
     // increment cart quantity
     public function incCartQty($cart_id){
+
+        if(Session::has('couponPrice')){
+            Session::forget('couponPrice');
+        }
 
         Cart::update($cart_id, array(
             'quantity' => +1,

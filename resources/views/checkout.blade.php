@@ -38,14 +38,20 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active" id="divisions" onchange="findDistrict()" name="shipping_division_id">
+                                    <select class="form-control select-active @error('shipping_division_id')
+                                    is-invalid
+                                @enderror" id="divisions" onchange="findDistrict()" name="shipping_division_id" >
                                         <option value=" ">Select a Divission...</option>
                                         @foreach ($divisions as $division)
 
                                         <option value="{{ $division->division_id }}">{{ $division->division_name }}</option>
 
                                         @endforeach
+
                                     </select>
+                                    @error('shipping_division_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
@@ -56,15 +62,20 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active" id="district" name="shipping_district_id" onchange="findPoliceStation()">
+                                    <select class="form-control select-active @error('shipping_district_id')
+                                    is-invalid
+                                @enderror" id="district" name="shipping_district_id" onchange="findPoliceStation()" >
                                         <option value=" ">Please Select Divission First</option>
                                         {{-- district add from ajax  --}}
 
                                     </select>
+                                    @error('shipping_district_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="text" name="shipping_post_code" placeholder="Post Code *">
+                                <input type="number" name="shipping_post_code" placeholder="Post Code *">
                             </div>
                         </div>
 
@@ -72,12 +83,17 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active" id="policeStation" name="shipping_police_station_id">
+                                    <select class="form-control select-active @error('shipping_police_station_id')
+                                    is-invalid
+                                @enderror" id="policeStation" name="shipping_police_station_id"  >
 
                                         <option value=" ">Please Select District First</option>
                                         {{-- police station load from ajax  --}}
 
                                     </select>
+                                    @error('shipping_police_station_id')
+                                        <span class="text-danger">{{$message}}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
@@ -88,6 +104,9 @@
 
                         <div class="form-group mb-30">
                             <textarea rows="5" placeholder="Additional information" name="shipping_additional_information"></textarea>
+                            @error('shipping_additional_information')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
                         </div>
 
 
@@ -253,12 +272,12 @@
                                 data-target="#paypal" aria-controls="paypal">Online Getway</label>
                         </div>
                     </div>
-                    <div class="payment-logo d-flex">
+                    {{-- <div class="payment-logo d-flex">
                         <img class="mr-15" src="{{asset('frontend')}}/assets/imgs/theme/icons/payment-paypal.svg" alt="">
                         <img class="mr-15" src="{{asset('frontend')}}/assets/imgs/theme/icons/payment-visa.svg" alt="">
                         <img class="mr-15" src="{{asset('frontend')}}/assets/imgs/theme/icons/payment-master.svg" alt="">
                         <img src="{{asset('frontend')}}/assets/imgs/theme/icons/payment-zapper.svg" alt="">
-                    </div>
+                    </div> --}}
                     <button class="btn btn-fill-out btn-block mt-30" type="submit">Place An Order</button>
                     {{-- <a href="#" class="btn btn-fill-out btn-block mt-30">Place an Order<i
                             class="fi-rs-sign-out ml-15"></i></a> --}}
