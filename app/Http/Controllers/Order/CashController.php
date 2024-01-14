@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderMail;
 use Illuminate\Http\Request;
 
 use App\Models\Order;
@@ -11,19 +12,20 @@ use Cart;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CashController extends Controller
 {
     //order with stripe
 
     public function cashOrder(Request $request){
-
+        // take amount wit coupon
         if(Session::has('couponPrice')){
             $total_amount = Session::get('couponPrice')['price'];
         }else{
             $total_amount = round(Cart::getSubTotal());
         }
-
+        // insert order
         $order_id = Order::insertGetId([
             'user_id' => Auth::user()->user_id,
             'division_id' => $request->division_id,
@@ -52,6 +54,7 @@ class CashController extends Controller
 
         ]);
 
+        // insert order item
         $carts = Cart::getContent();
         foreach($carts as $cart){
 
@@ -69,13 +72,28 @@ class CashController extends Controller
 
         } // End Foreach
 
+        // destroy coupon session
         if (Session::has('couponPrice')) {
            Session::forget('couponPrice');
         }
 
-
+        // clear all cart
         Cart::clear();
 
+        // send mail
+
+        $invoice = Order::findOrFail($order_id);
+
+        $data = [
+
+            'name' => $request->name,
+            'invoice_no' => $invoice->invoice_no,
+            'amount' => $total_amount,
+            'email' => $request->email,
+
+        ];
+
+        Mail::to($request->email)->send(new OrderMail($data));
 
         $notification = array(
             'message' => 'Your Order Place Successfully',

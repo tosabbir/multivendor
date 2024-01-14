@@ -15,6 +15,49 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+
+
+     // find coupon here
+     public function findCoupon(Request $request, $coupon_code){
+        $coupon = Coupon::where('coupon_code', $coupon_code)->first();
+        $subtotal = $request->subtotal;
+        if($coupon != null){
+
+            $couponValidity = Coupon::where('coupon_code', $coupon_code)
+            ->where('coupon_validity', '>=', Carbon::now()->toDateTimeString())
+            ->first();
+
+            if($couponValidity != null){
+                $price = $subtotal - $coupon->coupon_discount;
+
+
+                Session::put('couponPrice', [
+                    'coupon_code' => $coupon->coupon_code,
+                    'coupon_discount' => $coupon->coupon_discount,
+                    'price' => $price,
+                ]);
+
+                return response()->json([
+                    'success' => 'Coupon Apply Successfully',
+                    'coupon_code' => $coupon->coupon_code,
+                    'coupon_discount' => $coupon->coupon_discount,
+                    'price' => $price,
+                ]);
+
+            }else{
+                return response()->json([
+                    'validityError' => '!Sorry This Coupon Validity Already Expired',
+                ]);
+            }
+
+        }else{
+            return response()->json([
+                'unmatchError' => '!Sorry This Is Not Our Coupon Code',
+            ]);
+        }
+    }
+
+
      //add to cart
      public function productAddToCart(Request $request, $id){
 
@@ -210,45 +253,6 @@ class CartController extends Controller
         ]);
     }
 
-    // find coupon here
-    public function findCoupon(Request $request, $coupon_code){
-        $coupon = Coupon::where('coupon_code', $coupon_code)->first();
-        $subtotal = $request->subtotal;
-        if($coupon != null){
-
-            $couponValidity = Coupon::where('coupon_code', $coupon_code)
-            ->where('coupon_validity', '>=', Carbon::now()->toDateTimeString())
-            ->first();
-
-            if($couponValidity != null){
-                $price = $subtotal - $coupon->coupon_discount;
-
-
-                Session::put('couponPrice', [
-                    'coupon_code' => $coupon->coupon_code,
-                    'coupon_discount' => $coupon->coupon_discount,
-                    'price' => $price,
-                ]);
-
-                return response()->json([
-                    'success' => 'Coupon Apply Successfully',
-                    'coupon_code' => $coupon->coupon_code,
-                    'coupon_discount' => $coupon->coupon_discount,
-                    'price' => $price,
-                ]);
-
-            }else{
-                return response()->json([
-                    'validityError' => '!Sorry This Coupon Validity Already Expired',
-                ]);
-            }
-
-        }else{
-            return response()->json([
-                'unmatchError' => '!Sorry This Is Not Our Coupon Code',
-            ]);
-        }
-    }
 
     public function checkout(){
 

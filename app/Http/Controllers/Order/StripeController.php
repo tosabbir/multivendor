@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Order;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\OrderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Cart;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 
 class StripeController extends Controller
@@ -94,6 +96,20 @@ class StripeController extends Controller
 
         Cart::clear();
 
+        // send mail
+
+        $invoice = Order::findOrFail($order_id);
+
+        $data = [
+
+            'name' => $request->name,
+            'invoice_no' => $invoice->invoice_no,
+            'amount' => $total_amount,
+            'email' => $request->email,
+
+        ];
+
+        Mail::to($request->email)->send(new OrderMail($data));
 
         $notification = array(
             'message' => 'Your Order Place Successfully',
