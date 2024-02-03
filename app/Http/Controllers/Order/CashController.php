@@ -49,7 +49,7 @@ class CashController extends Controller
             'order_date' => Carbon::now()->format('d F Y'),
             'order_month' => Carbon::now()->format('F'),
             'order_year' => Carbon::now()->format('Y'),
-            'status_id' => 2,
+            'status' => 'pending',
             'created_at' => Carbon::now(),
 
         ]);
@@ -82,18 +82,18 @@ class CashController extends Controller
 
         // send mail
 
-        $invoice = Order::findOrFail($order_id);
+        // $invoice = Order::findOrFail($order_id);
 
-        $data = [
+        // $data = [
 
-            'name' => $request->name,
-            'invoice_no' => $invoice->invoice_no,
-            'amount' => $total_amount,
-            'email' => $request->email,
+        //     'name' => $request->name,
+        //     'invoice_no' => $invoice->invoice_no,
+        //     'amount' => $total_amount,
+        //     'email' => $request->email,
 
-        ];
+        // ];
 
-        Mail::to($request->email)->send(new OrderMail($data));
+        // Mail::to($request->email)->send(new OrderMail($data));
 
         $notification = array(
             'message' => 'Your Order Place Successfully',

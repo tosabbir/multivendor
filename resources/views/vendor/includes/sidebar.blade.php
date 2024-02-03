@@ -37,6 +37,22 @@
 						</li>
 					</ul>
 				</li>
+
+                <li class="menu-label">Manage Order</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-home-circle'></i>
+						</div>
+						<div class="menu-title">Order</div>
+					</a>
+					<ul>
+
+                        <li> <a href="{{route('vendor.all.order')}}"><i class="bx bx-right-arrow-alt"></i>All Order</a>
+                        </li>
+					</ul>
+				</li>
+
+                <li class="menu-label">Manage Support</li>
 				<li>
 					<a href="https://themeforest.net/user/codervent" target="_blank">
 						<div class="parent-icon"><i class="bx bx-support"></i>

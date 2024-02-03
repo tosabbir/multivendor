@@ -11,12 +11,14 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Order\CashController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\StripeController;
 use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Vendor\VendorController;
+use App\Http\Controllers\Vendor\VendorOrderController;
 use App\Http\Controllers\Vendor\VendorProductController;
 use App\Http\Controllers\WishlistController;
 use App\Models\Compare;
@@ -146,6 +148,16 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/coupon/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.coupon.permanentlyDelete');
     });
 
+
+    Route::controller(OrderController::class)->group(function(){
+        Route::get('/admin/all/order', 'adminAllOrder')->name('admin.all.order');
+        Route::get('/admin/pending/order', 'adminPendingOrder')->name('admin.pending.order');
+        Route::get('/admin/processing/order', 'adminProcessingOrder')->name('admin.processing.order');
+
+        Route::get('/admin/order/show', 'adminOrderShow')->name('admin.order.show');
+    });
+
+
 });
 
 // admin login route
@@ -186,6 +198,14 @@ Route::middleware(['auth','role:3','verified'])->group(function(){
         Route::get('/vendor/recycle/product', 'recycle')->name('vendor.recycle.product');
         Route::get('/vendor/product/restore/{slug}', 'restore')->name('vendor.product.restore');
         Route::get('/vendor/product/permanentlyDelete/{slug}', 'permanentlyDelete')->name('vendor.product.permanentlyDelete');
+    });
+
+    Route::controller(VendorOrderController::class)->group(function(){
+        Route::get('/vendor/all/order', 'vendorAllOrder')->name('vendor.all.order');
+        Route::get('/vendor/pending/order', 'vendorPendingOrder')->name('vendor.pending.order');
+        Route::get('/vendor/processing/order', 'vendorProcessingOrder')->name('vendor.processing.order');
+
+        Route::get('/vendor/order/show', 'vendorOrderShow')->name('vendor.order.show');
     });
 
 

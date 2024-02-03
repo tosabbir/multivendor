@@ -126,6 +126,43 @@
 						</li>
 					</ul>
 				</li>
+
+
+				<li class="menu-label">Order Manage</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-cart'></i>
+						</div>
+						<div class="menu-title">Orders</div>
+					</a>
+					<ul>
+                        <li> <a href="{{route('admin.all.order')}}"><i class="bx bx-right-arrow-alt"></i>All Order</a>
+                        </li>
+
+						</li>
+					</ul>
+				</li>
+
+
+
+				<li class="menu-label">Support</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-cart'></i>
+						</div>
+						<div class="menu-title">Support</div>
+					</a>
+					<ul>
+                        {{-- <li> <a href="{{route('admin.all.order')}}"><i class="bx bx-right-arrow-alt"></i>All Order</a>
+                        </li> --}}
+						{{-- <li> <a href="{{route('admin.all.coupon')}}"><i class="bx bx-right-arrow-alt"></i>All Coupons</a>
+						</li>
+						<li> <a href="{{route('admin.recycle.coupon')}}"><i class="bx bx-right-arrow-alt"></i>Trash</a> --}}
+						</li>
+					</ul>
+				</li>
 			</ul>
 			<!--end navigation-->
 		</div>
