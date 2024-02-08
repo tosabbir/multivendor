@@ -51,7 +51,7 @@
                                     <td>{{ $item->invoice_no }}</td>
                                     <td>{{ $item->amount }}</td>
                                     <td>{{ $item->payment_method }}</td>
-                                    <td>{{ $item->status_id }}</td>
+                                    <td>{{ $item->status}}</td>
                                     <td>
                                         <a href="{{ route('admin.order.show', $item->id) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>

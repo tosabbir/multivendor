@@ -88,7 +88,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'photo' => $customeName,
-                'slag' => $slug,
+                'slug' => $slug,
                 'role_id' => 4,
                 'status_id' => 1,
                 'password' => Hash::make($request->password),
@@ -159,6 +159,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,' . $id . 'email'],
             'phone' => ['required', 'max:20', 'unique:users,phone,' . $id . 'phone'],
+            
             'address' => ['required', 'max:100'],
         ]);
 

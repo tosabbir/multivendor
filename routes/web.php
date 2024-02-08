@@ -17,6 +17,7 @@ use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorOrderController;
 use App\Http\Controllers\Vendor\VendorProductController;
@@ -253,7 +254,7 @@ Route::controller(FrontendController::class)->group(function(){
     // product quick view
     Route::get('/product/quick/view/{id}', 'productQuickView');
 
-    // all Cart route here
+    // all user Cart route here
     Route::controller(CartController::class)->group(function(){
         // add to cart
         Route::post('/product/add/to/cart/{product_id}', 'productAddToCart');
@@ -289,19 +290,39 @@ Route::controller(FrontendController::class)->group(function(){
         Route::get('/checkout', 'checkout')->name('checkout');
 
 
-        // // all user route after login
-        Route::middleware(['auth','role:4','verified'])->group(function(){
+    });
 
-            // find district
-            Route::get('/find/district/{division_id}', 'findDistrict');
+    // // all user route after login
+    Route::middleware(['auth','role:4','verified'])->group(function(){
 
-            // find district
-            Route::get('/find/police/station/{division_id}', 'findPoliceStation');
+        // find district
+        Route::get('/find/district/{division_id}', 'findDistrict');
 
-        });
+        // find district
+        Route::get('/find/police/station/{division_id}', 'findPoliceStation');
+
+    });
+});
+
+
+// // User Profile Related Route
+Route::middleware(['auth','role:4','verified'])->group(function(){
+
+    Route::controller(UserProfileController::class)->group(function(){
+
+        // account details page view
+        Route::get('/user/account/details', 'accountDetails')->name('user.account.details');
+
+        // user profile setting page view
+        Route::get('/user/profile/settings', 'accountSettings')->name('user.profile.settings');
+
+        // user password change
+        Route::post('/user/password/update', 'userPasswordUpdate')->name('user.password.update');
     });
 
 });
+
+
 // // all checkout related route here
 Route::middleware(['auth','role:4','verified'])->group(function(){
 
@@ -360,9 +381,9 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
         Route::post('/cash/order', 'cashOrder')->name('cash.order');
 
     });
+
+
 });
-
-
 
 
 
