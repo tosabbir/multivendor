@@ -11,9 +11,12 @@
     <div class="page-content pt-150 pb-150">
         <div class="container">
             <div class="row">
-                <div class="col-lg-10 m-auto">
+                <div class="col-lg-12 m-auto">
                     <div class="row">
-                        <div class="col-md-3">
+
+                        @include('user_sidebar')
+
+                        {{-- <div class="col-md-3">
                             <div class="dashboard-menu">
                                 <ul class="nav flex-column" role="tablist">
 
@@ -59,7 +62,8 @@
                                     </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
+
                         <div class="col-md-9">
                             <div class="tab-content account dashboard-content pl-50">
 
