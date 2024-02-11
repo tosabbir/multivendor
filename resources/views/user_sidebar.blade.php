@@ -15,7 +15,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link  {{ ($route == 'user.orders')? 'active' : '' }} " href="#orders">
+                <a class="nav-link  {{ ($route == 'user.order')? 'active' : '' }} " href="{{ route('user.order') }}">
                     <i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
             </li>
 

@@ -17,6 +17,7 @@ use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Superadmin\SuperadminController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\Vendor\VendorController;
 use App\Http\Controllers\Vendor\VendorOrderController;
@@ -318,6 +319,13 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
 
         // user password change
         Route::post('/user/password/update', 'userPasswordUpdate')->name('user.password.update');
+
+
+    });
+    Route::controller(UserOrderController::class)->group(function(){
+
+        // user order
+        Route::get('/user/order', 'userOrder')->name('user.order');
     });
 
 });
