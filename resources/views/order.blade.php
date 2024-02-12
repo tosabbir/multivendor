@@ -52,13 +52,16 @@
                                                                 <td>
                                                                     @if ($order->status == 'pending')
                                                                         <span class="badge rounded-pill bg-warning">Pending</span>
+
+                                                                    @elseif ($order->status == 'processing')
+                                                                        <span class="badge rounded-pill bg-info">processing</span>
                                                                     @endif
                                                                 </td>
 
                                                                 <td>
-                                                                    <a href="#" class="btn-small mx-3"><i class="fa fa-eye" style="font-size: large; color:black;"></i></a>
+                                                                    <a href="{{ route('user.order.details',$order->id) }}" class="btn-small mx-3"><i class="fa fa-eye" style="font-size: large; color:black;"></i></a>
 
-                                                                    <a href="#" class="btn-small "><i class="fa fa-download" style="font-size: large; color:blue;"></i></a>
+                                                                    <a href="{{ route('order.invoice.download',  $order->id) }}" class="btn-small "><i class="fa fa-download" style="font-size: large; color:blue;"></i></a>
 
                                                                 </td>
                                                             </tr>

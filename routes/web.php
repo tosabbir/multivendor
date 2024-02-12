@@ -326,6 +326,13 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
 
         // user order
         Route::get('/user/order', 'userOrder')->name('user.order');
+
+        // user order details
+        Route::get('/user/order/details/{id}', 'userOrderDetails')->name('user.order.details');
+
+        // user order invoice download
+        Route::get('/order/invoice/download/{id}', 'userOrderInvoicePdf')->name('order.invoice.download');
+
     });
 
 });
