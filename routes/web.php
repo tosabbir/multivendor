@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
@@ -11,7 +12,6 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Order\CashController;
-use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\StripeController;
 use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\ProfileController;
@@ -151,12 +151,12 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
     });
 
 
-    Route::controller(OrderController::class)->group(function(){
+    Route::controller(AdminOrderController::class)->group(function(){
         Route::get('/admin/all/order', 'adminAllOrder')->name('admin.all.order');
         Route::get('/admin/pending/order', 'adminPendingOrder')->name('admin.pending.order');
         Route::get('/admin/processing/order', 'adminProcessingOrder')->name('admin.processing.order');
 
-        Route::get('/admin/order/show', 'adminOrderShow')->name('admin.order.show');
+        Route::get('/admin/order/details/show/{id}', 'adminOrderDetailsShow')->name('admin.order.show');
     });
 
 

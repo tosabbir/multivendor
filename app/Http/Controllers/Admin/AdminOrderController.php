@@ -1,82 +1,33 @@
 <?php
 
-namespace App\Http\Controllers\Order;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class OrderController extends Controller
+class AdminOrderController extends Controller
 {
-
-    // all order for admin
-    public function adminAllOrder(){
+    /**
+     * Display a listing of the resource.
+     */
+     // all order for admin
+     public function adminAllOrder(){
 
         $all = Order::latest()->get();
         return view('admin.order.all_order', compact('all'));
     }
 
-    // show order for admin
-    public function adminOrderShow(){
+    public function adminOrderDetailsShow($id){
 
-        return "show order";
+        $order_details = Order::with('division','district','police_station','user')->where('id', $id)->first();
+
+        $order_item = OrderItem::with('order', 'product')->where('order_id', $id)->latest()->get();
+
+        return view('admin.order.order_details', compact('order_details', 'order_item'));
     }
 
 
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

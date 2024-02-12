@@ -1,144 +1,143 @@
-@extends('master');
+@extends('admin.admin_master')
 @section('content')
-    <div class="page-header breadcrumb-wrap">
-        <div class="container">
-            <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Pages <span></span> My Account
+    <div class="page-content">
+        <!--breadcrumb-->
+        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+            <div class="breadcrumb-title pe-3">Order</div>
+            <div class="ps-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0 p-0">
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Order Details</li>
+                    </ol>
+                </nav>
             </div>
         </div>
-    </div>
-    <div class="page-content">
+        <!--end breadcrumb-->
 
         {{-- order details  --}}
-        <div class="container">
+        <div class="container p-5">
             <div class="row">
-                <div class="col-lg-11 m-auto">
-                    <div class="row">
-
-                        @include('user_sidebar')
-
-                        {{-- shipping details  --}}
-                        <div class="col-md-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Shipping Details</h5>
-                                </div>
-
-                                <div class="card-body">
-                                    <table class="table" style="background:#F4F6FA;font-weight: 600;">
-                                        <tr>
-                                            <th>Shipping Name:</th>
-                                            <th>{{ $order_details->name }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Shipping Phone:</th>
-                                            <th>{{ $order_details->phone }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Shipping Email:</th>
-                                            <th>{{ $order_details->email }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Division:</th>
-                                            <th>{{ $order_details->division->division_name }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>District:</th>
-                                            <th>{{ $order_details->district->district_name }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>State :</th>
-                                            <th>{{ $order_details->police_station->police_station_name }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Post Code :</th>
-                                            <th>{{ $order_details->post_code }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Shipping Address:</th>
-                                            <th>{{ $order_details->address }}</th>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Order Date :</th>
-                                            <th>{{ $order_details->order_date }}</th>
-                                        </tr>
-
-                                    </table>
-
-                                </div>
-
-                            </div>
+                {{-- shipping details  --}}
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Shipping Details</h5>
                         </div>
-                        {{-- end shipping details  --}}
 
-                        {{-- order details  --}}
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>Order Details</h5>
-                                </div>
+                        <div class="card-body">
+                            <table class="table" style="background:#F4F6FA;font-weight: 600;">
+                                <tr>
+                                    <th>Shipping Name:</th>
+                                    <th>{{ $order_details->name }}</th>
+                                </tr>
 
-                                <div class="card-body">
-                                    <table class="table" style="background:#F4F6FA;font-weight: 600;">
-                                        <tr>
-                                            <th>Order Id:</th>
-                                            <th>{{ $order_details->id }}</th>
-                                        </tr>
+                                <tr>
+                                    <th>Shipping Phone:</th>
+                                    <th>{{ $order_details->phone }}</th>
+                                </tr>
 
-                                        <tr>
-                                            <th>Invoice Id:</th>
-                                            <th>{{ $order_details->invoice_no }}</th>
-                                        </tr>
+                                <tr>
+                                    <th>Shipping Email:</th>
+                                    <th>{{ $order_details->email }}</th>
+                                </tr>
 
+                                <tr>
+                                    <th>Division:</th>
+                                    <th>{{ $order_details->division->division_name }}</th>
+                                </tr>
 
-                                        <tr>
-                                            <th>Payment Type:</th>
-                                            <th>{{ $order_details->payment_type }}</th>
-                                        </tr>
+                                <tr>
+                                    <th>District:</th>
+                                    <th>{{ $order_details->district->district_name }}</th>
+                                </tr>
 
-                                        <tr>
-                                            <th>Amount:</th>
-                                            <th>{{ $order_details->amount }}</th>
-                                        </tr>
+                                <tr>
+                                    <th>State :</th>
+                                    <th>{{ $order_details->police_station->police_station_name }}</th>
+                                </tr>
 
-                                        <tr>
-                                            <th>Order Date :</th>
-                                            <th>{{ $order_details->order_date }}</th>
-                                        </tr>
+                                <tr>
+                                    <th>Post Code :</th>
+                                    <th>{{ $order_details->post_code }}</th>
+                                </tr>
 
-                                        <tr>
-                                            <th>Status:</th>
-                                            <th>
-                                                @if ($order_details->status == 'pending')
-                                                    <span class="badge rounded-pill bg-warning">Pending</span>
-                                                @elseif ($order_details->status == 'processing')
-                                                    <span class="badge rounded-pill bg-info">processing</span>
-                                                @endif
-                                            </th>
-                                        </tr>
-                                    </table>
+                                <tr>
+                                    <th>Shipping Address:</th>
+                                    <th>{{ $order_details->address }}</th>
+                                </tr>
 
-                                </div>
+                                <tr>
+                                    <th>Order Date :</th>
+                                    <th>{{ $order_details->order_date }}</th>
+                                </tr>
 
-                            </div>
+                            </table>
+
                         </div>
-                        {{-- order shipping details  --}}
+
                     </div>
                 </div>
-            </div>
-        </div>
+                {{-- end shipping details  --}}
 
-        {{-- product details  --}}
-        <div class="container p-5">
+                {{-- order details  --}}
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Order Details</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table" style="background:#F4F6FA;font-weight: 600;">
+                                <tr>
+                                    <th>Order Id:</th>
+                                    <th>{{ $order_details->id }}</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Invoice Id:</th>
+                                    <th>{{ $order_details->invoice_no }}</th>
+                                </tr>
+
+
+                                <tr>
+                                    <th>Payment Type:</th>
+                                    <th>{{ $order_details->payment_type }}</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Amount:</th>
+                                    <th>{{ $order_details->amount }}</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Order Date :</th>
+                                    <th>{{ $order_details->order_date }}</th>
+                                </tr>
+
+                                <tr>
+                                    <th>Status:</th>
+                                    <th>
+                                        @if ($order_details->status == 'pending')
+                                            <span class="badge rounded-pill bg-warning">Pending</span>
+                                        @elseif ($order_details->status == 'processing')
+                                            <span class="badge rounded-pill bg-info">processing</span>
+                                        @endif
+                                    </th>
+                                </tr>
+                            </table>
+                            <a href="#" class="btn btn-success">Confirm Order</a>
+
+                        </div>
+
+                    </div>
+                </div>
+                {{-- order shipping details  --}}
+
+            </div>
+
+            {{-- product details  --}}
             <div class="row">
                 <div class="col-md-12">
 
@@ -147,6 +146,7 @@
                             <h5>Product Details</h5>
                         </div>
                         <div class="card-body">
+
 
                             <div class="table-responsive">
                                 <table class="table" style="font-weight: 600;">
@@ -249,16 +249,19 @@
                                 </div>
                                 <button class="btn btn-danger">Return</button>
                             @endif
-
                         </div>
                     </div>
-
 
                 </div>
 
 
 
             </div>
+
         </div>
+
+
     </div>
+
+    <script></script>
 @endsection
