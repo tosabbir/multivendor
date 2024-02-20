@@ -150,13 +150,25 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/coupon/permanentlyDelete/{slug}', 'permanentlyDelete')->name('admin.coupon.permanentlyDelete');
     });
 
-
+    // admin order related route
     Route::controller(AdminOrderController::class)->group(function(){
         Route::get('/admin/all/order', 'adminAllOrder')->name('admin.all.order');
         Route::get('/admin/pending/order', 'adminPendingOrder')->name('admin.pending.order');
         Route::get('/admin/processing/order', 'adminProcessingOrder')->name('admin.processing.order');
 
         Route::get('/admin/order/details/show/{id}', 'adminOrderDetailsShow')->name('admin.order.show');
+
+        Route::get('/admin/order/pending/to/processing/{id}', 'adminOrderPendingToProcessing')->name('admin.order.pending.to.processing');
+
+        Route::get('/admin/all/processing/order', 'allProcessingOrder')->name('admin.all.processing.order');
+
+        Route::get('/admin/order/processing/to/shipping/{id}', 'adminOrderProcessingToShipping')->name('admin.order.processing.to.shipping');
+
+        Route::get('/admin/all/shipping/order', 'allShippingOrder')->name('admin.all.shipping.order');
+
+        Route::get('/admin/order/shipping/to/delivered/{id}', 'adminOrderShippingToDelivered')->name('admin.order.shipping.to.delivered');
+
+        Route::get('/admin/all/delivered/order', 'allDeliveredOrder')->name('admin.all.delivered.order');
     });
 
 
@@ -291,18 +303,18 @@ Route::controller(FrontendController::class)->group(function(){
         Route::get('/checkout', 'checkout')->name('checkout');
 
 
+        // all user route after login
+        Route::middleware(['auth','role:4','verified'])->group(function(){
+
+            // find district
+            Route::get('/find/district/{division_id}', 'findDistrict');
+
+            // find district
+            Route::get('/find/police/station/{division_id}', 'findPoliceStation');
+
+        });
     });
 
-    // // all user route after login
-    Route::middleware(['auth','role:4','verified'])->group(function(){
-
-        // find district
-        Route::get('/find/district/{division_id}', 'findDistrict');
-
-        // find district
-        Route::get('/find/police/station/{division_id}', 'findPoliceStation');
-
-    });
 });
 
 

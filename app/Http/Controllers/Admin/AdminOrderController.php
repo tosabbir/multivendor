@@ -16,7 +16,7 @@ class AdminOrderController extends Controller
      // all order for admin
      public function adminAllOrder(){
 
-        $all = Order::latest()->get();
+        $all = Order::where('status', 'pending')->latest()->get();
         return view('admin.order.all_order', compact('all'));
     }
 
@@ -29,5 +29,53 @@ class AdminOrderController extends Controller
         return view('admin.order.order_details', compact('order_details', 'order_item'));
     }
 
+    public function adminOrderPendingToProcessing($id){
+        Order::where('id', $id)->update(['status' => 'processing']);
+
+        $notification = array(
+            'message' => "Order Confirm And Move On Processing Done",
+            'alert-type' => "success",
+        );
+
+        return back()->with($notification);
+    }
+
+
+    public function allProcessingOrder(){
+        $all = Order::where('status', 'processing')->latest()->get();
+        return view('admin.order.all_processing_order', compact('all'));
+    }
+
+    public function adminOrderProcessingToShipping($id){
+        Order::where('id', $id)->update(['status' => 'shipping']);
+
+        $notification = array(
+            'message' => "Order Add To Shipping Done",
+            'alert-type' => "success",
+        );
+
+        return back()->with($notification);
+    }
+
+    public function allShippingOrder(){
+        $all = Order::where('status', 'shipping')->latest()->get();
+        return view('admin.order.all_shipping_order', compact('all'));
+    }
+
+    public function adminOrderShippingToDelivered($id){
+        Order::where('id', $id)->update(['status' => 'delivered']);
+
+        $notification = array(
+            'message' => "Order Delivered Done",
+            'alert-type' => "success",
+        );
+
+        return back()->with($notification);
+    }
+
+    public function allDeliveredOrder(){
+        $all = Order::where('status', 'delivered')->latest()->get();
+        return view('admin.order.all_shipping_order', compact('all'));
+    }
 
 }

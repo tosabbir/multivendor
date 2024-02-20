@@ -119,9 +119,13 @@
                                             <th>Status:</th>
                                             <th>
                                                 @if ($order_details->status == 'pending')
-                                                    <span class="badge rounded-pill bg-warning">Pending</span>
+                                                    <span class="badge rounded-pill bg-danger">Pending</span>
                                                 @elseif ($order_details->status == 'processing')
-                                                    <span class="badge rounded-pill bg-info">processing</span>
+                                                    <span class="badge rounded-pill bg-warning">processing</span>
+                                                @elseif ($order_details->status == 'shipping')
+                                                    <span class="badge rounded-pill bg-info">shipping</span>
+                                                @elseif ($order_details->status == 'delivered')
+                                                    <span class="badge rounded-pill bg-success">Delivered</span>
                                                 @endif
                                             </th>
                                         </tr>
@@ -240,7 +244,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            @if ($order_details->status != 'delevered')
+                            @if ($order_details->status != 'delivered')
                             @else
                                 <div class="mb-3">
                                     <h4>Return Your Order</h4>

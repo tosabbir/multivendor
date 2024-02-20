@@ -120,14 +120,29 @@
                                     <th>Status:</th>
                                     <th>
                                         @if ($order_details->status == 'pending')
-                                            <span class="badge rounded-pill bg-warning">Pending</span>
+                                            <span class="badge rounded-pill bg-danger">Pending</span>
                                         @elseif ($order_details->status == 'processing')
-                                            <span class="badge rounded-pill bg-info">processing</span>
+                                            <span class="badge rounded-pill bg-warning">processing</span>
+                                        @elseif ($order_details->status == 'shipping')
+                                            <span class="badge rounded-pill bg-info">shipping</span>
+                                        @elseif ($order_details->status == 'delivered')
+                                            <span class="badge rounded-pill bg-success">Delivered</span>
                                         @endif
                                     </th>
                                 </tr>
                             </table>
-                            <a href="#" class="btn btn-success">Confirm Order</a>
+
+                            @if ($order_details->status == 'pending')
+
+                            <a href="{{ route('admin.order.pending.to.processing',$order_details->id) }}" class="btn btn-success">Confirm Order</a>
+
+                            @elseif ($order_details->status == 'processing')
+                            <a href="{{ route('admin.order.processing.to.shipping',$order_details->id) }}" class="btn btn-success">Add To Shiping</a>
+
+                            @elseif ($order_details->status == 'shipping')
+                            <a href="{{ route('admin.order.shipping.to.delivered',$order_details->id) }}" class="btn btn-success">Delivered Order</a>
+
+                            @endif
 
                         </div>
 

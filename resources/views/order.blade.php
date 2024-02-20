@@ -51,10 +51,14 @@
                                                                 <td>{{ $order->invoice_no }}</td>
                                                                 <td>
                                                                     @if ($order->status == 'pending')
-                                                                        <span class="badge rounded-pill bg-warning">Pending</span>
+                                                                        <span class="badge rounded-pill bg-danger">Pending</span>
 
                                                                     @elseif ($order->status == 'processing')
-                                                                        <span class="badge rounded-pill bg-info">processing</span>
+                                                                        <span class="badge rounded-pill bg-warning">Processing</span>
+                                                                    @elseif ($order->status == 'shipping')
+                                                                        <span class="badge rounded-pill bg-info">Shipping</span>
+                                                                    @elseif ($order->status == 'delivered')
+                                                                        <span class="badge rounded-pill bg-success">Delivered</span>
                                                                     @endif
                                                                 </td>
 

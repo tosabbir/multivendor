@@ -137,10 +137,20 @@
 						<div class="menu-title">Orders</div>
 					</a>
 					<ul>
-                        <li> <a href="{{route('admin.all.order')}}"><i class="bx bx-right-arrow-alt"></i>All Order</a>
+
+                        <li> <a href="{{route('admin.all.order')}}"><i class="bx bx-right-arrow-alt"></i>All Pending Order</a>
                         </li>
 
-						</li>
+                        <li> <a href="{{route('admin.all.processing.order')}}"><i class="bx bx-right-arrow-alt"></i>All Processing Order</a>
+                        </li>
+
+                        <li> <a href="{{route('admin.all.shipping.order')}}"><i class="bx bx-right-arrow-alt"></i>All Shipping Order</a>
+                        </li>
+
+                        <li> <a href="{{route('admin.all.delivered.order')}}"><i class="bx bx-right-arrow-alt"></i>All Delivered Order</a>
+                        </li>
+
+
 					</ul>
 				</li>
 
