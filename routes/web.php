@@ -342,6 +342,12 @@ Route::middleware(['auth','role:4','verified'])->group(function(){
         // user order details
         Route::get('/user/order/details/{id}', 'userOrderDetails')->name('user.order.details');
 
+        // user order return request
+        Route::post('/user/order/return/{id}', 'userOrderReturn')->name('user.order.return');
+
+        // user return order page
+        Route::get('/user/return/order/page', 'userReturnOrderPage')->name('user.return.order.page');
+
         // user order invoice download
         Route::get('/order/invoice/download/{id}', 'userOrderInvoicePdf')->name('order.invoice.download');
 

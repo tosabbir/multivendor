@@ -8,6 +8,7 @@ use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class UserOrderController extends Controller
 {
@@ -45,5 +46,34 @@ class UserOrderController extends Controller
         $pdf = Pdf::loadView('order_invoice', compact('order_details', 'order_item'));
         // return $pdf->download($order_details->invoice_no.'invoice.pdf');
         return view('order_invoice', compact('order_details', 'order_item'));
+    }
+
+    // order return request
+    public function userOrderReturn(Request $request, $id){
+
+        $this->validate($request, [
+            'return_reason' => 'required|string',
+        ]);
+
+        Order::where('id', $id)->update([
+            'return_order' => '1',
+            'return_reason' => $request->return_reason,
+            'return_date' => Carbon::now()->format('d F Y'),
+        ]);
+
+        $notification = array(
+            'message' => 'Your Order Return Request Send Successfully',
+            'alert-type' => 'success'
+        );
+
+        return back()->with($notification);
+    }
+
+    // user return order page
+    public function userReturnOrderPage(){
+
+        $orders = Order::where('return_order', 1)->latest()->get();
+
+        return view('return_order', compact('orders'));
     }
 }

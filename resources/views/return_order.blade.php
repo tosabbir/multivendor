@@ -33,8 +33,8 @@
                                                             <th>Date</th>
                                                             <th>Total</th>
                                                             <th>Payment</th>
-                                                            <th>Phone:</th>
                                                             <th>Invoice ID:</th>
+                                                            <th>Return Reason</th>
                                                             <th>Status</th>
                                                             <th>Actions</th>
                                                         </tr>
@@ -47,21 +47,17 @@
                                                                 <td>{{ $order->created_at }}</td>
                                                                 <td>{{ $order->amount }}</td>
                                                                 <td>{{ $order->payment_type }}</td>
-                                                                <td>{{ $order->phone }}</td>
                                                                 <td>{{ $order->invoice_no }}</td>
+                                                                <td>{{ $order->return_reason }}</td>
                                                                 <td>
-                                                                    @if ($order->status == 'pending')
+                                                                    @if ($order->return_order == 1)
                                                                         <span class="badge rounded-pill bg-danger">Pending</span>
 
-                                                                    @elseif ($order->status == 'processing')
-                                                                        <span class="badge rounded-pill bg-warning">Processing</span>
+                                                                    @elseif ($order->return_order == 2)
+                                                                        <span class="badge rounded-pill bg-warning">Returned</span>
                                                                     @elseif ($order->status == 'shipping')
                                                                         <span class="badge rounded-pill bg-info">Shipping</span>
-                                                                    @elseif ($order->status == 'delivered')
-                                                                        <span class="badge rounded-pill bg-success">Delivered</span>
-                                                                        @if ($order->return_order == 1)
-                                                                        <span class="badge rounded-pill bg-info">Return</span>
-                                                                        @endif
+
                                                                     @endif
                                                                 </td>
 

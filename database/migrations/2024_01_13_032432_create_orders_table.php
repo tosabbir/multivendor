@@ -42,6 +42,7 @@ return new class extends Migration
             $table->string('cancel_reason')->nullable();
             $table->string('return_date')->nullable();
             $table->string('return_reason')->nullable();
+            $table->enum('return_order', [0, 1, 2])->default(0);
             $table->enum('status', ['pending', 'processing', 'shipping', 'delivered'])->default('pending');
             $table->softDeletes();
             $table->timestamps();

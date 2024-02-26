@@ -246,12 +246,33 @@
                             </div>
                             @if ($order_details->status != 'delivered')
                             @else
-                                <div class="mb-3">
-                                    <h4>Return Your Order</h4>
-                                    <label for="" class="form-label">Return Reason</label>
-                                    <textarea class="form-control" name="" id="" rows="3"></textarea>
-                                </div>
-                                <button class="btn btn-danger">Return</button>
+
+                            @php
+                                $order = App\Models\Order::where('id', $order_details->id)->where('return_order', '1')->first();
+
+                            @endphp
+
+                                @if ($order)
+                                    <h3>You Send Return Request For This Product</h3>
+
+                                @else()
+
+                                    <form action="{{route('user.order.return', $order_details->id)}}" method="post">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <h4>Return Your Order</h4>
+                                            <label for="" class="form-label ">Return Reason</label>
+                                            <textarea class="form-control @error('return_reason') is-invalid @enderror" name="return_reason" id="return_reason" rows="3"></textarea>
+                                            @error('return_reason')
+                                                <span class="text-danger"></span>{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        <button class="btn btn-danger" type="submit">Return</button>
+                                    </form>
+
+                                @endif
+
+
                             @endif
 
                         </div>

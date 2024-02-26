@@ -20,6 +20,11 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link  {{ ($route == 'user.return.order.page')? 'active' : '' }} " href="{{ route('user.return.order.page') }}">
+                    <i class="fi-rs-shopping-bag mr-10"></i>Return Orders</a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ ($route == 'user.voucher')? 'active' : '' }}" href="#voucher"
                     ><i
                         class="fi-rs-shopping-bag mr-10"></i>Voucher</a>
