@@ -223,7 +223,9 @@ Route::middleware(['auth','role:3','verified'])->group(function(){
         Route::get('/vendor/pending/order', 'vendorPendingOrder')->name('vendor.pending.order');
         Route::get('/vendor/processing/order', 'vendorProcessingOrder')->name('vendor.processing.order');
 
-        Route::get('/vendor/order/show', 'vendorOrderShow')->name('vendor.order.show');
+        Route::get('/vendor/order/show/{id}', 'vendorOrderDetails')->name('vendor.order.show');
+
+        Route::get('/vendor/all/return/order', 'vendorAllReturnOrder')->name('vendor.all.return.order');
     });
 
 

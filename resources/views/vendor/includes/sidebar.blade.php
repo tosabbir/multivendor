@@ -49,6 +49,9 @@
 
                         <li> <a href="{{route('vendor.all.order')}}"><i class="bx bx-right-arrow-alt"></i>All Order</a>
                         </li>
+
+                        <li> <a href="{{route('vendor.all.return.order')}}"><i class="bx bx-right-arrow-alt"></i>All Return Order</a>
+                        </li>
 					</ul>
 				</li>
 

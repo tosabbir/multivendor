@@ -30,7 +30,7 @@ class UserOrderController extends Controller
 
         $order_item = OrderItem::with('order', 'product')->where('order_id', $id)->latest()->get();
 
-        return view('order_details', compact('order_details', 'order_item'));
+        return view('vendor_order_details', compact('order_details', 'order_item'));
 
     }
 

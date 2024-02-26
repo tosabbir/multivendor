@@ -1,4 +1,4 @@
-@extends('admin.admin_master')
+@extends('vendor.vendor_master')
 @section('content')
     <div class="page-content">
         <!--breadcrumb-->
@@ -18,10 +18,10 @@
 
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('admin.pending.order') }}" type="button" class="btn btn-primary btn-sm">Pending Order</a>
+                    <a href="{{ route('vendor.pending.order') }}" type="button" class="btn btn-primary btn-sm">Pending Order</a>
                 </div>
                 <div class="btn-group">
-                    <a href="{{ route('admin.processing.order') }}" type="button" class="btn btn-primary btn-sm">Processing Order</a>
+                    <a href="{{ route('vendor.processing.order') }}" type="button" class="btn btn-primary btn-sm">Processing Order</a>
                 </div>
             </div>
         </div>
@@ -39,24 +39,36 @@
                                 <th>Invoice </th>
                                 <th>Amount </th>
                                 <th>Payment </th>
-                                <th>status </th>
+                                <th>Status </th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($all as $key => $item)
+
+                                @if ($item->order->return_reason != null)
+
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->order_date }}</td>
-                                    <td>{{ $item->invoice_no }}</td>
-                                    <td>{{ $item->amount }}</td>
-                                    <td>{{ $item->payment_method }}</td>
-                                    <td>{{ $item->status}}</td>
+                                    <td>{{ $item->order->order_date }}</td>
+                                    <td>{{ $item->order->invoice_no }}</td>
+                                    <td>{{ $item->order->amount }}</td>
+                                    <td>{{ $item->order->payment_method }}</td>
                                     <td>
-                                        <a href="{{ route('admin.order.show', $item->order->id) }}"
+                                        @if ($item->order->return_order == 1)
+                                            Return Pending
+                                        @else
+                                            Returned
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('vendor.order.show', $item->id) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>
                                     </td>
                                 </tr>
+                                @else
+
+                                @endif
                             @endforeach
                         </tbody>
                         <tfoot>

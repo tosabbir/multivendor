@@ -51,9 +51,17 @@
                                     <td>{{ $item->order->invoice_no }}</td>
                                     <td>{{ $item->order->amount }}</td>
                                     <td>{{ $item->order->payment_method }}</td>
-                                    <td>{{ $item->order->status }}</td>
                                     <td>
-                                        <a href="{{ route('vendor.order.show', $item->id) }}"
+                                        @if ($item->order->return_order == 1)
+                                            Return Pending
+                                        @elseif ($item->order->return_order == 2)
+                                            Returned
+                                        @else
+                                            {{$item->order->status}}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('vendor.order.show', $item->order->id) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>
                                     </td>
                                 </tr>
