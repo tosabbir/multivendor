@@ -127,7 +127,16 @@
                                             <span class="badge rounded-pill bg-info">shipping</span>
                                         @elseif ($order_details->status == 'delivered')
                                             <span class="badge rounded-pill bg-success">Delivered</span>
+                                            @if ($order_details->return_order == 1)
+                                            <span class="badge rounded-pill bg-danger">Return Requested</span>
+
+                                            @elseif($order_details->return_order == 2)
+                                            <span class="badge rounded-pill bg-danger">Returned</span>
+
+                                            @endif
+
                                         @endif
+
                                     </th>
                                 </tr>
                             </table>

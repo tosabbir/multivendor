@@ -126,6 +126,14 @@
                                                     <span class="badge rounded-pill bg-info">shipping</span>
                                                 @elseif ($order_details->status == 'delivered')
                                                     <span class="badge rounded-pill bg-success">Delivered</span>
+
+                                                    @if ($order_details->return_order == 1)
+                                                    <span class="badge rounded-pill bg-danger">Return Requested</span>
+
+                                                    @elseif($order_details->return_order == 2)
+                                                    <span class="badge rounded-pill bg-danger">Returned</span>
+
+                                                    @endif
                                                 @endif
                                             </th>
                                         </tr>
@@ -248,15 +256,15 @@
                             @else
 
                             @php
-                                $order = App\Models\Order::where('id', $order_details->id)->where('return_order', '1')->first();
+                                $order = App\Models\Order::where('id', $order_details->id)->whereNotNull('return_reason')->first();
 
                             @endphp
 
-                                @if ($order)
+                                @if ($order->return_order == 1)
                                     <h3>You Send Return Request For This Product</h3>
-
-                                @else()
-
+                                @elseif($order->return_order == 2)
+                                    <h3>You Alreay Return This Product</h3>
+                                @else
                                     <form action="{{route('user.order.return', $order_details->id)}}" method="post">
                                         @csrf
                                         <div class="mb-3">
@@ -269,7 +277,6 @@
                                         </div>
                                         <button class="btn btn-danger" type="submit">Return</button>
                                     </form>
-
                                 @endif
 
 

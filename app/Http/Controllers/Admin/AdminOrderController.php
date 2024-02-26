@@ -78,4 +78,21 @@ class AdminOrderController extends Controller
         return view('admin.order.all_shipping_order', compact('all'));
     }
 
+    public function allReturnOrder(){
+        $all = Order::whereNotNull('return_reason')->latest()->get();
+        return view('admin.order.all_return_order', compact('all'));
+    }
+
+    public function adminOrderReturnApproved($id){
+        Order::where('id', $id)->update([
+            'return_order' => 2,
+        ]);
+
+        $notification = array(
+            'message' => "Order Request Approved Done",
+            'alert-type' => "success",
+        );
+        return back()->with($notification);
+    }
+
 }

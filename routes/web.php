@@ -169,6 +169,10 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/order/shipping/to/delivered/{id}', 'adminOrderShippingToDelivered')->name('admin.order.shipping.to.delivered');
 
         Route::get('/admin/all/delivered/order', 'allDeliveredOrder')->name('admin.all.delivered.order');
+
+        Route::get('/admin/all/return/order', 'allReturnOrder')->name('admin.all.return.order');
+
+        Route::get('/admin/order/return/approved/{id}', 'adminOrderReturnApproved')->name('admin.order.return.approved');
     });
 
 

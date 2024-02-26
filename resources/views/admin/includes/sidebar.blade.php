@@ -150,6 +150,9 @@
                         <li> <a href="{{route('admin.all.delivered.order')}}"><i class="bx bx-right-arrow-alt"></i>All Delivered Order</a>
                         </li>
 
+                        <li> <a href="{{route('admin.all.return.order')}}"><i class="bx bx-right-arrow-alt"></i>All Return Order</a>
+                        </li>
+
 
 					</ul>
 				</li>

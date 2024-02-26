@@ -72,7 +72,7 @@ class UserOrderController extends Controller
     // user return order page
     public function userReturnOrderPage(){
 
-        $orders = Order::where('return_order', 1)->latest()->get();
+        $orders = Order::whereNotNull('return_reason')->latest()->get();
 
         return view('return_order', compact('orders'));
     }
