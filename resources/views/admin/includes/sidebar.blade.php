@@ -82,10 +82,27 @@
 						<div class="menu-title">Vendors</div>
 					</a>
 					<ul>
-						<li> <a href="{{route('admin.all.active.vendor')}}"><i class="bx bx-right-arrow-alt"></i>All Active Vendor</a>
+						<li> <a href="{{route('admin.all.active.vendor')}}"><i class="bx bx-right-arrow-alt"></i>All Approved Vendor</a>
 						</li>
 						<li> <a href="{{route('admin.all.requested.vendor')}}"><i class="bx bx-right-arrow-alt"></i>All Requested Vendor</a>
 						</li>
+					</ul>
+				</li>
+
+                <li class="menu-label">manage Users</li>
+
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-cart'></i>
+						</div>
+						<div class="menu-title">Users</div>
+					</a>
+					<ul>
+
+                        <li> <a href="{{route('admin.all.user')}}"><i class="bx bx-right-arrow-alt"></i>All User</a>
+                        </li>
+
+
 					</ul>
 				</li>
 
@@ -156,6 +173,7 @@
 
 					</ul>
 				</li>
+
 
 
 

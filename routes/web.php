@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\UserMonitorController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -173,6 +174,14 @@ Route::middleware(['auth','role:2','verified'])->group(function(){
         Route::get('/admin/all/return/order', 'allReturnOrder')->name('admin.all.return.order');
 
         Route::get('/admin/order/return/approved/{id}', 'adminOrderReturnApproved')->name('admin.order.return.approved');
+    });
+
+
+     // all user monitor related route
+     Route::controller(UserMonitorController::class)->group(function(){
+        // all users
+        Route::get('/admin/all/user', 'adminAllUser')->name('admin.all.user');
+
     });
 
 

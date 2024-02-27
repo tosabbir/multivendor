@@ -8,18 +8,18 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Vendor</li>
+                        <li class="breadcrumb-item active" aria-current="page">Users</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('admin.add.brand') }}" type="button" class="btn btn-primary">All Active Vendor</a>
+                    <a href="{{ route('admin.all.user') }}" type="button" class="btn btn-primary">All Users</a>
                 </div>
             </div>
         </div>
         <!--end breadcrumb-->
-        <h6 class="mb-0 text-uppercase">All Active Vendor</h6>
+        <h6 class="mb-0 text-uppercase">All Users</h6>
         <hr />
         <div class="card">
             <div class="card-body">
@@ -28,40 +28,32 @@
                         <thead>
                             <tr>
                                 <th>SL:</th>
-                                <th>Shop Name</th>
-                                <th>Username</th>
+                                <th>Img</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Review</th>
-                                <th>Shop Profile Pic</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($all_vendor as $key => $vendor)
+                            @foreach ($all as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $vendor->vendor_shop_name }}</td>
-                                    <td>{{ $vendor->username }}</td>
-                                    <td>{{ $vendor->email }}</td>
-                                    <td>{{ $vendor->phone }}</td>
                                     <td>
-                                        <?php
-                                            for ($i=1; $i <= $vendor->vendor_avg_review ; $i++) {
-                                            ?>
-                                            <span><i class="fa fa-star"></i></span>
-                                        <?php
-                                            }
-                                        ?>
+                                        <img src="{{ asset('uploads/user/' . $item->photo) }}" alt="Brand Image"
+                                        style="width: 60px; height: 60px">
                                     </td>
-                                    <td><img src="{{ asset('uploads/vendor/' . $vendor->vendor_profile_pic) }}" alt="Brand Image"
-                                            style="width: 60px; height: 60px"></td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->phone }}</td>
+                                    <td>{{ $item->statusInfo->status_name }}</td>
                                     <td>
-                                        <a href="{{ route('admin.brand.edit', $vendor->slug) }}"
+                                        <a href="{{ route('admin.brand.edit', $item->slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-pencil"></i></a>
-                                        <a href="{{ route('admin.brand.edit', $vendor->slug) }}"
+                                        <a href="{{ route('admin.brand.edit', $item->slug) }}"
                                             class="btn btn-info btn-sm "><i class="fa fa-eye "></i></a>
-                                        <a href="{{ route('admin.brand.delete', $vendor->slug) }}"
+                                        <a href="{{ route('admin.brand.delete', $item->slug) }}"
                                             class="btn btn-info btn-sm " id="delete"><i class="fa fa-trash "></i></a>
                                     </td>
                                 </tr>
@@ -70,12 +62,10 @@
                         <tfoot>
                             <tr>
                                 <th>SL:</th>
-                                <th>Shop Name</th>
-                                <th>Username</th>
+                                <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Review</th>
-                                <th>Shop Profile Pic</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
